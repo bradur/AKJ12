@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinDamage: 1
   MaxDamage: 1
-  FireRate: 8
-  Range: 5
-  Inaccuracy: 15
+  FireRate: 15
+  Range: 7
+  Inaccuracy: 5
