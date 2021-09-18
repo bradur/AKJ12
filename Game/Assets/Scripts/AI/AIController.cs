@@ -11,6 +11,8 @@ public class AIController : MonoBehaviour
     private Character character;
     private Character target;
 
+    private string ALLY_LAYER = "Ally";
+    private string ENEMY_LAYER = "Enemy";
     private string[] ALLY_TARGET_LAYERS = { "Enemy" };
     private string[] ENEMY_TARGET_LAYERS = { "Ally" };
 
@@ -31,6 +33,7 @@ public class AIController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Gun gun;
+    private Destroyed destroyed;
 
     private Vector2 myPosition
     {
@@ -44,6 +47,7 @@ public class AIController : MonoBehaviour
     {
         character = GetComponent<Character>();
         rb = GetComponent<Rigidbody2D>();
+        destroyed = GetComponent<Destroyed>();
     }
 
     // Start is called before the first frame update
@@ -63,6 +67,9 @@ public class AIController : MonoBehaviour
 
         gun = GetComponentInChildren<Gun>();
         gun.Init(config.GunConfig, targetLayers(config.Faction));
+
+        var layerName = config.Faction == Faction.ENEMY ? ENEMY_LAYER : ALLY_LAYER;
+        gameObject.layer = LayerMask.NameToLayer(layerName);
     }
 
     private string[] targetLayers(Faction faction)
@@ -78,6 +85,10 @@ public class AIController : MonoBehaviour
         if (isAlive())
         {
             handleRotation();
+        }
+        else
+        {
+            destroyed.SetDestroyed();
         }
     }
 
