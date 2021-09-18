@@ -999,6 +999,7 @@ MonoBehaviour:
   partsNeededCount: 3
   robotPrefab: {fileID: 4535913421123328575, guid: c082c3e887dde3c42b42f8716b444840, type: 3}
   spawnPoint: {fileID: 3102369540597034909}
+  minigameConfig: {fileID: 11400000, guid: d03f57361e15e134e99a366878baeda2, type: 2}
 --- !u!1 &3102369540511742991
 GameObject:
   m_ObjectHideFlags: 0

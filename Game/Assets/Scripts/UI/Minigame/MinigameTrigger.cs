@@ -13,33 +13,11 @@ public class MinigameTrigger : MonoBehaviour
 
     private bool finished = false;
 
-    [SerializeField]
-    private MinigameTriggerOptions defaultOptions;
+    private Transform target;
 
-    void Start() {
-        Initialize();
-    }
-
-    public void Initialize()
-    {
-        defaultOptions.PositiveAction = delegate(int value, Vector2 pos) {
-            PoppingTextOptions textOptions = new PoppingTextOptions();
-            textOptions.Color = Color.green;
-            textOptions.Text = $"Great!";
-            textOptions.Position = pos;
-            WorldUI.main.ShowPoppingText(textOptions);
-        };
-        defaultOptions.NegativeAction = delegate(int value, Vector2 pos) {
-            PoppingTextOptions textOptions = new PoppingTextOptions();
-            textOptions.Color = Color.red;
-            textOptions.Text = $"Poor!";
-            textOptions.Position = pos;
-            WorldUI.main.ShowPoppingText(textOptions);
-        };
-        Initialize(defaultOptions);
-    }
     public void Initialize(MinigameTriggerOptions newOptions)
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         options = newOptions;
         if (minigame == null)
         {
@@ -58,11 +36,11 @@ public class MinigameTrigger : MonoBehaviour
             if (minigame.Trigger == null || (minigame.Trigger.DistanceFromTrigger() >= DistanceFromTrigger())) {
                 minigame.Initialize(this, options.MinigameOptions, options.PositiveAction, options.NegativeAction);
                 minigame.SetPosition(transform.position);
+                Debug.Log($"minigame pos to {transform.position}");
             }
         }
         if (minigame.Trigger == this) {
             minigame.Show();
-            Debug.Log("Show minigame!");
         }
     }
 
@@ -75,7 +53,7 @@ public class MinigameTrigger : MonoBehaviour
     }
 
     public float DistanceFromTrigger() {
-        return Mathf.Abs(Vector2.Distance(transform.position, options.Target.position));
+        return Mathf.Abs(Vector2.Distance(transform.position, target.position));
     }
 
     void Update()
@@ -99,9 +77,12 @@ public class MinigameTrigger : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        if (options == null) {
+            return;
+        }
         // Draw a yellow sphere at the transform's position
-        Gizmos.color = defaultOptions.DebugColor;
-        Gizmos.DrawSphere(transform.position, defaultOptions.Radius);
+        Gizmos.color = options.DebugColor;
+        Gizmos.DrawSphere(transform.position, options.Radius);
     }
 }
 
@@ -110,7 +91,6 @@ public class MinigameTriggerOptions
 {
     public Color DebugColor;
     public float Radius;
-    public Transform Target;
     public MinigameOptions MinigameOptions;
     public UnityAction<int, Vector2> PositiveAction;
     public UnityAction<int, Vector2> NegativeAction;

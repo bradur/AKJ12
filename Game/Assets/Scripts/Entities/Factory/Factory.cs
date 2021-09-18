@@ -19,9 +19,15 @@ public class Factory : MonoBehaviour
     private float assemblyStartedTime = 0;
     private float assemblyDuration = 5f;
 
+    [SerializeField]
+    private MinigameConfig minigameConfig;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (minigameConfig == null) {
+            Debug.LogError("Factory needs a MinigameConfig!");
+        }
         unloadTrigger = GetComponentsInChildren<UnloadParts>()[0];
         if (unloadTrigger != null)
         {
@@ -51,7 +57,29 @@ public class Factory : MonoBehaviour
             GameObject allyRobot = Instantiate(robotPrefab);
             allyRobot.transform.position = spawnPoint.position;
             allyRobot.transform.parent = ContainerManager.main.GetRobotContainer().transform;
+            SetupMinigame(allyRobot);
         }
+    }
+
+    private void SetupMinigame(GameObject allyRobot) {
+        MinigameTrigger minigameTrigger = allyRobot.GetComponentInChildren<MinigameTrigger>();
+        minigameConfig.Options.PositiveAction = delegate(int value, Vector2 pos) {
+            PoppingTextOptions textOptions = new PoppingTextOptions();
+            textOptions.Color = value == 100 ? Color.green : Color.yellow;
+            textOptions.Text = value == 100 ? $"Great!" : "OK!";
+            textOptions.Position = pos;
+            WorldUI.main.ShowPoppingText(textOptions);
+            AIController aiController = allyRobot.GetComponentInChildren<AIController>();
+            aiController.Activate();
+        };
+        minigameConfig.Options.NegativeAction = delegate(int value, Vector2 pos) {
+            PoppingTextOptions textOptions = new PoppingTextOptions();
+            textOptions.Color = Color.red;
+            textOptions.Text = $"Boom you died!";
+            textOptions.Position = pos;
+            WorldUI.main.ShowPoppingText(textOptions);
+        };
+        minigameTrigger.Initialize(minigameConfig.Options);
     }
 
     public void AddParts(float value)
