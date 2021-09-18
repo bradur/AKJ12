@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public CharacterConfig CharacterConfig;
     public GunConfig GunConfig;
     public Transform AimTarget;
 
@@ -13,6 +14,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D body;
 
     private Gun gun;
+    private Character character;
     private string[] GUN_TARGET_LAYERS = { "Enemy" };
 
     // Start is called before the first frame update
@@ -21,6 +23,9 @@ public class Movement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<Gun>();
         gun.Init(GunConfig, GUN_TARGET_LAYERS);
+
+        character = GetComponent<Character>();
+        character.Init(Faction.PLAYER, CharacterConfig);
     }
 
     // Update is called once per frame
