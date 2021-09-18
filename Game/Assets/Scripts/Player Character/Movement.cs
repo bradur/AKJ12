@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public GunConfig GunConfig;
+    public Transform AimTarget;
+
     private float speed = 4f;
     private float vertical;
     private float horizontal;
     private Rigidbody2D body;
+
+    private Gun gun;
+    private string[] GUN_TARGET_LAYERS = { "Enemy" };
+
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        gun = GetComponentInChildren<Gun>();
+        gun.Init(GunConfig, GUN_TARGET_LAYERS);
     }
 
     // Update is called once per frame
@@ -19,6 +28,15 @@ public class Movement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            gun.Shoot();
+        }
+
+        var targetDir = AimTarget.position - transform.position;
+        var angle = Vector2.SignedAngle(transform.up, targetDir);
+        transform.Rotate(Vector3.forward, angle);
     }
 
     void FixedUpdate()

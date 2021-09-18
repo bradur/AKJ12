@@ -43,7 +43,6 @@ public class Character : MonoBehaviour
         {
             Kill();
         }
-        Debug.Log("OUCH");
     }
 
     void Kill()
