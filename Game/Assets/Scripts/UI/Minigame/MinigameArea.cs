@@ -30,7 +30,6 @@ public class MinigameArea : MonoBehaviour
     {
         float sizeMultiplier = options.PercentageSize / 100f;
         float sizeY = parentRectTransform.rect.height * sizeMultiplier;
-        Debug.Log($"Size: {sizeY} ({parentRectTransform.rect.height} * {sizeMultiplier}) ({options.PercentageSize} / 100f)");
         rectTransform.sizeDelta = new Vector2(
             parentRectTransform.rect.width,
             sizeY
@@ -43,7 +42,7 @@ public class MinigameArea : MonoBehaviour
 [System.Serializable]
 public class MinigameAreaOptions
 {
-    [Range(0, 100)]
+    [Range(1, 100)]
     public int PercentageSize;
 
     public Color Color;

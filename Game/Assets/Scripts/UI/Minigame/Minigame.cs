@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class Minigame : MonoBehaviour
 {
@@ -10,34 +11,31 @@ public class Minigame : MonoBehaviour
 
     [SerializeField]
     private MinigameOptions defaultOptions;
+    [SerializeField]
+    private MinigameSelectionIndicator indicator;
     private MinigameOptions options;
 
     private List<MinigameArea> areas = new List<MinigameArea>();
 
-    private UnityAction<int> PositiveCallback;
-    private UnityAction<int> NegativeCallback;
+    private UnityAction<int, Vector2> PositiveCallback;
+    private UnityAction<int, Vector2> NegativeCallback;
+
+    private RectTransform rectTransform;
+
+    public bool Finished {get; private set;}
+
+    private Animator animator;
 
     void Start() {
-        Initialize();
     }
 
-    public void Initialize()
-    {
-        Initialize(
-            delegate (int value)
-            {
-                Debug.Log($"Performed <color=green>positive</color> reaction with value {value}.");
-            },
-            delegate (int value)
-            {
-                Debug.Log($"Performed <color=red>negative</color> reaction with value {value}.");
-            }
-        );
+    public void SetPosition(Vector2 minigamePosition) {
+        transform.position = minigamePosition;
     }
 
     public void Initialize(
-        UnityAction<int> PositiveCallback,
-        UnityAction<int> NegativeCallback
+        UnityAction<int, Vector2> PositiveCallback,
+        UnityAction<int, Vector2> NegativeCallback
     )
     {
         Initialize(defaultOptions, PositiveCallback, NegativeCallback);
@@ -45,34 +43,38 @@ public class Minigame : MonoBehaviour
 
     public void Initialize(
         MinigameOptions newOptions,
-        UnityAction<int> PositiveCallback,
-        UnityAction<int> NegativeCallback
+        UnityAction<int, Vector2> PositiveCallback,
+        UnityAction<int, Vector2> NegativeCallback
     )
     {
+        animator = GetComponent<Animator>();
+        Finished = false;
         options = newOptions;
         this.PositiveCallback = PositiveCallback;
         this.NegativeCallback = NegativeCallback;
         SetUpAreas();
+        indicator.Initialize(options.IndicatorOptions);
     }
 
-    public bool MakeSelection(int percentage)
+    public bool MakeSelection(int percentage, Vector2 selectionPosition)
     {
-        Debug.Log($"Minigame selection at: {percentage}");
         MinigameArea area = GetArea(percentage);
         if (area == null) {
-            Debug.Log("Indicator hit no area.");
             return false;
         }
-        Debug.Log($"Selection stopped at area {area}.");
 
         if (area.Options.Result == SelectionResult.Positive)
         {
-            PositiveResult(area.Options.ResultValue);
+            PositiveResult(area.Options.ResultValue, selectionPosition);
         }
         else if (area.Options.Result == SelectionResult.Negative)
         {
-            NegativeResult(area.Options.ResultValue);
+            NegativeResult(area.Options.ResultValue, selectionPosition);
+        } else if (area.Options.Result == SelectionResult.None) {
+            return false;
         }
+        Finished = true;
+        indicator.Disable();
         return true;
     }
 
@@ -81,7 +83,7 @@ public class Minigame : MonoBehaviour
         int currentPercentageMin = 0;
         int currentPercentageMax = 100;
         MinigameAreaOptions previousArea = null;
-        foreach (MinigameArea area in areas)
+        foreach (MinigameArea area in areas.Reverse<MinigameArea>())
         {
             if (previousArea == null)
             {
@@ -93,14 +95,26 @@ public class Minigame : MonoBehaviour
                 currentPercentageMin = currentPercentageMax;
             }
             currentPercentageMax = currentPercentageMin + area.PercentageSize;
-            Debug.Log($"selectionPercentage: {selectionPercentage}. Area ps: {currentPercentageMin} / {currentPercentageMax}");
             if (selectionPercentage >= currentPercentageMin && selectionPercentage <= currentPercentageMax)
             {
-                Debug.Log($"selectionPercentage: {selectionPercentage} is within {currentPercentageMin} and {currentPercentageMax}");
                 return area;
             }
         }
         return null;
+    }
+
+
+    public void Show() {
+        animator.SetTrigger("Show");
+    }
+
+    public void Hide() {
+        animator.SetTrigger("Hide");
+        indicator.Disable();
+    }
+
+    public void ShowFinished() {
+        indicator.Enable();
     }
 
     private void SetUpAreas()
@@ -114,18 +128,27 @@ public class Minigame : MonoBehaviour
         }
     }
 
-    public void PositiveResult(int multiplier)
+    public void PositiveResult(int value, Vector2 resultPosition)
     {
-        PositiveCallback(multiplier);
+        if (PositiveCallback != null) {
+            PositiveCallback(value, resultPosition);
+        } else {
+            Debug.Log($"Minigame {name} doesn't have PositiveCallback!");
+        }
     }
-    public void NegativeResult(int multiplier)
+    public void NegativeResult(int value, Vector2 resultPosition)
     {
-        NegativeCallback(multiplier);
+        if (NegativeCallback != null) {
+            NegativeCallback(value, resultPosition);
+        } else {
+            Debug.Log($"Minigame {name} doesn't have NegativeCallback!");
+        }
     }
 }
 
 [System.Serializable]
 public class MinigameOptions
 {
+    public IndicatorOptions IndicatorOptions;
     public List<MinigameAreaOptions> Areas;
 }
