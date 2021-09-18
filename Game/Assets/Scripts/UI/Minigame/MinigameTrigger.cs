@@ -9,8 +9,9 @@ public class MinigameTrigger : MonoBehaviour
     public Minigame Minigame { get { return minigame; } }
     private MinigameTriggerOptions options;
 
-    private bool triggerEnabled = false;
-    private bool minigameShown = false;
+    private bool showing = false;
+
+    private bool finished = false;
 
     [SerializeField]
     private MinigameTriggerOptions defaultOptions;
@@ -40,27 +41,28 @@ public class MinigameTrigger : MonoBehaviour
     public void Initialize(MinigameTriggerOptions newOptions)
     {
         options = newOptions;
-        triggerEnabled = true;
+        if (minigame == null)
+        {
+            minigame = WorldUI.main.GetMinigame();
+        }
+    }
+
+    public void Finish() {
+        finished = true;
     }
 
     private void ShowMinigame()
     {
-        if (minigame == null)
+        if (minigame.Trigger != this)
         {
-            minigame = WorldUI.main.CreateMinigame(transform.position);
-            minigame.Initialize(options.MinigameOptions, options.PositiveAction, options.NegativeAction);
-            minigame.Show();
-            minigameShown = true;
-            return;
+            if (minigame.Trigger == null || (minigame.Trigger.DistanceFromTrigger() >= DistanceFromTrigger())) {
+                minigame.Initialize(this, options.MinigameOptions, options.PositiveAction, options.NegativeAction);
+                minigame.SetPosition(transform.position);
+            }
         }
-        if (!minigame.Finished)
-        {
+        if (minigame.Trigger == this) {
             minigame.Show();
-            minigameShown = true;
-        }
-        else
-        {
-            triggerEnabled = false;
+            Debug.Log("Show minigame!");
         }
     }
 
@@ -69,26 +71,29 @@ public class MinigameTrigger : MonoBehaviour
         if (minigame != null)
         {
             minigame.Hide();
-            minigameShown = false;
         }
     }
 
-    private float DistanceFromTrigger() {
+    public float DistanceFromTrigger() {
         return Mathf.Abs(Vector2.Distance(transform.position, options.Target.position));
     }
 
     void Update()
     {
-        if (triggerEnabled)
+        if (minigame == null) {
+            return;
+        }
+        if (!finished && !showing && DistanceFromTrigger() <= options.Radius)
         {
-            if (!minigameShown && DistanceFromTrigger() <= options.Radius)
-            {
-                ShowMinigame();
-            }
-            else if (minigameShown && DistanceFromTrigger() > options.Radius)
-            {
+            showing = true;
+            ShowMinigame();
+        }
+        if (showing && DistanceFromTrigger() > options.Radius)
+        {
+            if (minigame.Trigger == this) {
                 HideMinigame();
             }
+            showing = false;
         }
     }
 

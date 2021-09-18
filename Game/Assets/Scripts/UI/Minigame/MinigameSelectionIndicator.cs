@@ -44,7 +44,6 @@ public class MinigameSelectionIndicator : MonoBehaviour
 
     public void Disable() {
         canBeStarted = false;
-        Reset();
     }
 
     private void Reset() {

@@ -10,8 +10,6 @@ public class Minigame : MonoBehaviour
     private Transform areaContainer;
 
     [SerializeField]
-    private MinigameOptions defaultOptions;
-    [SerializeField]
     private MinigameSelectionIndicator indicator;
     private MinigameOptions options;
 
@@ -20,35 +18,25 @@ public class Minigame : MonoBehaviour
     private UnityAction<int, Vector2> PositiveCallback;
     private UnityAction<int, Vector2> NegativeCallback;
 
-    private RectTransform rectTransform;
-
-    public bool Finished {get; private set;}
+    public bool IsShown { get; private set; }
 
     private Animator animator;
 
-    void Start() {
-    }
-
-    public void SetPosition(Vector2 minigamePosition) {
-        transform.position = minigamePosition;
-    }
+    public MinigameTrigger Trigger { get; private set; }
 
     public void Initialize(
-        UnityAction<int, Vector2> PositiveCallback,
-        UnityAction<int, Vector2> NegativeCallback
-    )
-    {
-        Initialize(defaultOptions, PositiveCallback, NegativeCallback);
-    }
-
-    public void Initialize(
+        MinigameTrigger trigger,
         MinigameOptions newOptions,
         UnityAction<int, Vector2> PositiveCallback,
         UnityAction<int, Vector2> NegativeCallback
     )
     {
-        animator = GetComponent<Animator>();
-        Finished = false;
+        Trigger = trigger;
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        Reset();
         options = newOptions;
         this.PositiveCallback = PositiveCallback;
         this.NegativeCallback = NegativeCallback;
@@ -56,10 +44,29 @@ public class Minigame : MonoBehaviour
         indicator.Initialize(options.IndicatorOptions);
     }
 
+    public void Reset()
+    {
+        /*animator.ResetTrigger("Show");
+        animator.ResetTrigger("Hide");
+        animator.SetTrigger("Reset");*/
+        animator.Play("minigameIdle");
+        areas = new List<MinigameArea>();
+        foreach (Transform child in areaContainer)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void SetPosition(Vector2 minigamePosition)
+    {
+        transform.position = minigamePosition;
+    }
+
     public bool MakeSelection(int percentage, Vector2 selectionPosition)
     {
         MinigameArea area = GetArea(percentage);
-        if (area == null) {
+        if (area == null)
+        {
             return false;
         }
 
@@ -70,10 +77,12 @@ public class Minigame : MonoBehaviour
         else if (area.Options.Result == SelectionResult.Negative)
         {
             NegativeResult(area.Options.ResultValue, selectionPosition);
-        } else if (area.Options.Result == SelectionResult.None) {
+        }
+        else if (area.Options.Result == SelectionResult.None)
+        {
             return false;
         }
-        Finished = true;
+        Trigger.Finish();
         indicator.Disable();
         return true;
     }
@@ -104,19 +113,30 @@ public class Minigame : MonoBehaviour
     }
 
 
-    public void Show() {
-        animator.SetTrigger("Show");
+    public void Show()
+    {
+        //animator.SetTrigger("Show");
+        animator.Play("showMinigame");
     }
 
-    public void Hide() {
-        animator.SetTrigger("Hide");
+    public void Hide()
+    {
+        //animator.SetTrigger("Hide");
+        animator.Play("hideMinigame");
         indicator.Disable();
     }
 
-    public void ShowFinished() {
+    public void ShowFinished()
+    {
         indicator.Enable();
+        IsShown = true;
     }
 
+    public void HideFinished()
+    {
+        indicator.Enable();
+        IsShown = false;
+    }
     private void SetUpAreas()
     {
         foreach (MinigameAreaOptions areaOptions in options.Areas)
@@ -130,17 +150,23 @@ public class Minigame : MonoBehaviour
 
     public void PositiveResult(int value, Vector2 resultPosition)
     {
-        if (PositiveCallback != null) {
+        if (PositiveCallback != null)
+        {
             PositiveCallback(value, resultPosition);
-        } else {
+        }
+        else
+        {
             Debug.Log($"Minigame {name} doesn't have PositiveCallback!");
         }
     }
     public void NegativeResult(int value, Vector2 resultPosition)
     {
-        if (NegativeCallback != null) {
+        if (NegativeCallback != null)
+        {
             NegativeCallback(value, resultPosition);
-        } else {
+        }
+        else
+        {
             Debug.Log($"Minigame {name} doesn't have NegativeCallback!");
         }
     }
