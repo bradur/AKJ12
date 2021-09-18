@@ -15,7 +15,8 @@ MonoBehaviour:
   IdleType: 0
   AttackType: 0
   Faction: 0
-  AggroRange: 3
+  AggroRange: 5
   MoveSpeed: 5
   TurnSpeed: 180
   FireRate: 2
+  GunConfig: {fileID: 11400000, guid: 27b3115e6762b8744b057d3b06eed3bb, type: 2}

@@ -12,4 +12,5 @@ public class AIConfig : ScriptableObject
     public float MoveSpeed = 5;
     public float TurnSpeed = 180;
     public float FireRate = 2;
+    public GunConfig GunConfig;
 }

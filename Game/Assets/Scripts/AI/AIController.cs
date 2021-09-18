@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[RequireComponent(typeof(Character))]
 public class AIController : MonoBehaviour
 {
     [SerializeField]
     private AIConfig config;
     private Character character;
     private Character target;
+
+    private string[] ALLY_TARGET_LAYERS = { "Enemy" };
+    private string[] ENEMY_TARGET_LAYERS = { "Ally" };
 
     private float ACQUIRE_TARGETS_PER_SECOND = 5;
     private float TARGET_LOCATION_MARGIN = 0.1f;
@@ -26,6 +30,7 @@ public class AIController : MonoBehaviour
     public Vector2 TargetDirection;
 
     private Rigidbody2D rb;
+    private Gun gun;
 
     private Vector2 myPosition
     {
@@ -44,11 +49,25 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("AcquireTarget", 0.0f, 1.0f / ACQUIRE_TARGETS_PER_SECOND);
+        Init(config);
+    }
+
+    public void Init(AIConfig config)
+    {
+        this.config = config;
+        character.Init(config.Faction);
         idleRoutine = IdleRoutine.addToGameObject(this, config.IdleType);
         attackRoutine = AttackRoutine.addToGameObject(this, config.AttackType);
-
-        InvokeRepeating("AcquireTarget", 0.0f, 1.0f / ACQUIRE_TARGETS_PER_SECOND);
         targetFaction = config.Faction == Faction.ENEMY ? Faction.PLAYER : Faction.ENEMY;
+
+        gun = GetComponentInChildren<Gun>();
+        gun.Init(config.GunConfig, targetLayers(config.Faction));
+    }
+
+    private string[] targetLayers(Faction faction)
+    {
+        return faction == Faction.ENEMY ? ENEMY_TARGET_LAYERS : ALLY_TARGET_LAYERS;
     }
 
     // Update is called once per frame
@@ -56,7 +75,7 @@ public class AIController : MonoBehaviour
     {
         handleState();
         handleRoutines();
-        handleMoving();
+        handleRotation();
     }
 
     void FixedUpdate()
@@ -127,6 +146,7 @@ public class AIController : MonoBehaviour
             case State.ATTACK:
                 idleRoutine.enabled = false;
                 attackRoutine.enabled = true;
+                attackRoutine.SetTarget(target);
                 break;
             default:
                 Debug.LogError("Unexpected state " + state);
@@ -144,6 +164,19 @@ public class AIController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
+    }
+
+    private void handleRotation()
+    {
+        var rotation = Vector2.SignedAngle(transform.up, TargetDirection);
+        var maxRotationPerTick = Time.deltaTime * config.TurnSpeed;
+        var rotationPerTick = Mathf.Clamp(rotation, -maxRotationPerTick, maxRotationPerTick);
+        transform.Rotate(transform.forward, rotationPerTick);
+    }
+
+    public void Shoot()
+    {
+        gun.Shoot();
     }
 
     private bool hasTarget()

@@ -7,6 +7,7 @@ public class PatrolRoutine : IdleRoutine
     private AIController controller;
     private PatrolConfig config;
     private Vector2 targetPosition;
+    private bool idling = false;
 
     public void Init(AIController controller, PatrolConfig config)
     {
@@ -17,12 +18,14 @@ public class PatrolRoutine : IdleRoutine
     void OnDisable()
     {
         CancelInvoke("PickNewTargetLocation");
+        Debug.Log("DISABLED", this);
     }
 
     void OnEnable()
     {
         var idleTime = Random.Range(config.MinIdleTime, config.MaxIdleTime);
         Invoke("PickNewTargetLocation", idleTime);
+        Debug.Log("ENABLED", this);
     }
 
     // Start is called before the first frame update
@@ -34,10 +37,11 @@ public class PatrolRoutine : IdleRoutine
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
+        if (!idling && Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
             var idleTime = Random.Range(config.MinIdleTime, config.MaxIdleTime);
             Invoke("PickNewTargetLocation", idleTime);
+            idling = true;
         }
     }
 
@@ -45,6 +49,8 @@ public class PatrolRoutine : IdleRoutine
     {
         targetPosition = (Vector2)config.PatrolAreaCenter.position + Random.insideUnitCircle * config.PatrolRadius;
         controller.TargetLocation = targetPosition;
+        controller.TargetDirection = targetPosition - (Vector2)transform.position;
+        idling = false;
     }
 
     public struct PatrolConfig

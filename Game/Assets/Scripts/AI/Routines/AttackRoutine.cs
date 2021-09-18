@@ -17,6 +17,7 @@ public abstract class AttackRoutine : MonoBehaviour
         {
             case Type.DUMB_BLASTER:
                 var blasterRoutine = controller.gameObject.AddComponent<DumbBlasterRoutine>();
+                blasterRoutine.Init(controller);
                 return blasterRoutine;
             case Type.STRAFER:
                 Debug.LogError("Unimplemented AttackRoutine type: " + type);
@@ -26,4 +27,6 @@ public abstract class AttackRoutine : MonoBehaviour
                 return null;
         }
     }
+
+    public abstract void SetTarget(Character target);
 }

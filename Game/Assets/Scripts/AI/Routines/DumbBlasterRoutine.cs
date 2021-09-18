@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DumbBlasterRoutine : AttackRoutine
 {
-
     private AIController controller;
+    private Character target;
 
     public void Init(AIController controller)
     {
@@ -21,14 +21,31 @@ public class DumbBlasterRoutine : AttackRoutine
     void Update()
     {
         controller.TargetLocation = transform.position;
+        if (target != null)
+        {
+            Vector2 targetDir = target.transform.position - transform.position;
+            controller.TargetDirection = targetDir;
+
+            if (Vector2.Angle(transform.up, targetDir) < 5.0f)
+            {
+                controller.Shoot();
+            }
+        }
     }
 
     void OnDisable()
     {
+        Debug.Log("DISABLED", this);
     }
 
     void OnEnable()
     {
+        Debug.Log("ENABLED", this);
+    }
+
+    override public void SetTarget(Character target)
+    {
+        this.target = target;
     }
 
 }
