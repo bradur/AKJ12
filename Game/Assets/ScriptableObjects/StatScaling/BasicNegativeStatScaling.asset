@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415177cddc2fd4e40b3eeceaf519c8e1, type: 3}
   m_Name: BasicNegativeStatScaling
   m_EditorClassIdentifier: 
-  Health: 0.5
-  Damage: 0.5
-  Speed: 0.33
+  Health: 0.66
+  Damage: 0.75
+  Speed: 0.8

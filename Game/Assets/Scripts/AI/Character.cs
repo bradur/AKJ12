@@ -6,6 +6,7 @@ public class Character : MonoBehaviour
 {
     private CharacterConfig config;
     private float health;
+    private bool targetable = true;
 
     public Faction Faction
     {
@@ -54,6 +55,16 @@ public class Character : MonoBehaviour
     public void ScaleHealth(float scale)
     {
         health = health * scale;
+    }
+
+    public void SetTargetable(bool t)
+    {
+        targetable = t;
+    }
+
+    public bool GetTargetable()
+    {
+        return targetable;
     }
 }
 

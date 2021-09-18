@@ -36,6 +36,7 @@ public class AIController : MonoBehaviour
     public Vector2 TargetDirection;
 
     private Rigidbody2D rb;
+    private CircleCollider2D col;
     private Gun gun;
     private Destroyed destroyed;
     private float movementSpeed;
@@ -53,6 +54,7 @@ public class AIController : MonoBehaviour
         character = GetComponent<Character>();
         rb = GetComponent<Rigidbody2D>();
         destroyed = GetComponent<Destroyed>();
+        col = GetComponent<CircleCollider2D>();
     }
 
     // Start is called before the first frame update
@@ -63,6 +65,11 @@ public class AIController : MonoBehaviour
         if (!requiresJumpStart)
         {
             Activate();
+        }
+        else
+        {
+            col.enabled = false;
+            character.SetTargetable(false);
         }
     }
 
@@ -91,6 +98,8 @@ public class AIController : MonoBehaviour
     {
         InvokeRepeating("AcquireTarget", 0.0f, 1.0f / ACQUIRE_TARGETS_PER_SECOND);
         state = State.IDLE;
+        col.enabled = true;
+        character.SetTargetable(true);
     }
 
     // Update is called once per frame
@@ -128,7 +137,7 @@ public class AIController : MonoBehaviour
         float nearestDist = float.MaxValue;
         foreach (var possibleTarget in enemies)
         {
-            if (possibleTarget.Dead)
+            if (possibleTarget.Dead || !possibleTarget.GetTargetable())
             {
                 continue;
             }
@@ -252,14 +261,18 @@ public class AIController : MonoBehaviour
         movementSpeed = movementSpeed * scale;
     }
 
-    public void ScaleStat(ScalingStat stat, float scale) {
-        if(stat == ScalingStat.Health) {
+    public void ScaleStat(ScalingStat stat, float scale)
+    {
+        if (stat == ScalingStat.Health)
+        {
             character.ScaleHealth(scale);
         }
-        else if(stat == ScalingStat.Damage) {
+        else if (stat == ScalingStat.Damage)
+        {
             gun.ScaleDamage(scale);
         }
-        else if(stat == ScalingStat.Speed) {
+        else if (stat == ScalingStat.Speed)
+        {
             ScaleMoveSpeed(scale);
         }
     }

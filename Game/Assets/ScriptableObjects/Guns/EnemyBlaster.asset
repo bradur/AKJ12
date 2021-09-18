@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 415177cddc2fd4e40b3eeceaf519c8e1, type: 3}
-  m_Name: BasicPositiveStatScaling
+  m_Script: {fileID: 11500000, guid: 300475995226cd64f9920ebc6f4958c5, type: 3}
+  m_Name: EnemyBlaster
   m_EditorClassIdentifier: 
-  Health: 1.5
-  Damage: 1.5
-  Speed: 1.33
+  MinDamage: 1
+  MaxDamage: 1
+  FireRate: 12
+  Range: 7
+  Inaccuracy: 5

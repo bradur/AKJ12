@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 415177cddc2fd4e40b3eeceaf519c8e1, type: 3}
-  m_Name: BasicPositiveStatScaling
+  m_Script: {fileID: 11500000, guid: f974b326b80cacd46b76b44091f2edd7, type: 3}
+  m_Name: BasicAllyRobot
   m_EditorClassIdentifier: 
-  Health: 1.5
-  Damage: 1.5
-  Speed: 1.33
+  Health: 15

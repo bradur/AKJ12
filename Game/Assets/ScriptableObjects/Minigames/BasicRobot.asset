@@ -23,12 +23,12 @@ MonoBehaviour:
       Areas:
       - PercentageSize: 10
         Color: {r: 0.5566038, g: 0, b: 0, a: 1}
-        ResultValue: 50
+        ResultValue: 100
         Result: 2
       - PercentageSize: 12
         Color: {r: 0.10106132, g: 0.5, b: 0.03066039, a: 1}
         ResultValue: 100
-        Result: 0
+        Result: 1
       - PercentageSize: 24
         Color: {r: 0.14747167, g: 1, b: 0, a: 1}
         ResultValue: 80
@@ -40,4 +40,4 @@ MonoBehaviour:
       - PercentageSize: 30
         Color: {r: 1, g: 1, b: 1, a: 1}
         ResultValue: 1
-        Result: 0
+        Result: 3
