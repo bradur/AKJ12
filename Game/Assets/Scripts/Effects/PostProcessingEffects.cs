@@ -6,6 +6,9 @@ using UnityEngine.Rendering.Universal;
 
 public class PostProcessingEffects : MonoBehaviour
 {
+    [SerializeField]
+    public ParticleSystem bloodPuddle;
+
     public static PostProcessingEffects Main;
 
     public VolumeProfile profile;
@@ -13,6 +16,8 @@ public class PostProcessingEffects : MonoBehaviour
     public Vignette vignette;
 
     private float playerDamagedTimer = -1;
+
+    private GameObject player;
 
     void Awake()
     {
@@ -26,7 +31,7 @@ public class PostProcessingEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -52,7 +57,9 @@ public class PostProcessingEffects : MonoBehaviour
         options.DampingSpeed = 0.8f;
         options.Enabled = true;
         ScreenShakeEffect.main.Shake(options);
-        
+
+        bloodPuddle.transform.position = player.transform.position;
+        bloodPuddle.Play();
     }
 
     public void EnemyDamaged()

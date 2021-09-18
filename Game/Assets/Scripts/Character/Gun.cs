@@ -11,6 +11,12 @@ public class Gun : MonoBehaviour
     private ParticleSystem HitEffect;
 
     [SerializeField]
+    private ParticleSystem BloodEffect;
+
+    [SerializeField]
+    private LightFlash MuzzleLight;
+
+    [SerializeField]
     private Animator anim;
 
     private GunConfig config;
@@ -58,6 +64,7 @@ public class Gun : MonoBehaviour
             var hit = Physics2D.Raycast(Muzzle.position, targetDirection, config.Range, targetLayerMask);
             if (hit.collider != null)
             {
+                bool effectPlayed = false;
                 var character = hit.collider.GetComponent<Character>();
                 if (character != null)
                 {
@@ -66,13 +73,20 @@ public class Gun : MonoBehaviour
                     if (hit.collider.gameObject.tag == "Player")
                     {
                         PostProcessingEffects.Main.PlayerDamaged();
+                        BloodEffect.transform.position = hit.point;
+                        BloodEffect.Play();
+                        effectPlayed = true;
                     } else {
                         SoundManager.main.PlaySound(GameSoundType.RobotHit);
                         PostProcessingEffects.Main.EnemyDamaged();
                     }
                 }
-                HitEffect.transform.position = hit.point;
-                HitEffect.Play();
+
+                if (!effectPlayed)
+                {
+                    HitEffect.transform.position = hit.point;
+                    HitEffect.Play();
+                }
             }
 
             readyToFire = false;
@@ -90,6 +104,7 @@ public class Gun : MonoBehaviour
             }
 
             MuzzleFlash.Play();
+            MuzzleLight.Flash();
 
             if (anim != null)
             {
