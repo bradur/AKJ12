@@ -28,7 +28,7 @@ public class Destroyed : MonoBehaviour
         if (isDestroyed && !dead) {
             GameObject robotPart = Instantiate(robotPartPrefab);
             // TODO: set parent container
-            robotPart.transform.parent = null;
+            robotPart.transform.parent = ContainerManager.main.GetRobotPartContainer().transform;
             robotPart.transform.position = transform.position;
             RobotPartConfig conf = partsConfig.getRandomPart();
             robotPart.GetComponent<RobotPart>().Initialize(conf);
