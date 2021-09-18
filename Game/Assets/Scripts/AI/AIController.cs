@@ -8,6 +8,10 @@ public class AIController : MonoBehaviour
 {
     [SerializeField]
     private AIConfig config;
+
+    [SerializeField]
+    private bool requiresJumpStart;
+
     private Character character;
     private Character target;
 
@@ -23,7 +27,7 @@ public class AIController : MonoBehaviour
     private IdleRoutine idleRoutine;
     private AttackRoutine attackRoutine;
     private Faction targetFaction;
-    private State state = State.IDLE;
+    private State state = State.SLEEP;
 
     [HideInInspector]
     public Vector2 TargetLocation;
@@ -53,8 +57,12 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("AcquireTarget", 0.0f, 1.0f / ACQUIRE_TARGETS_PER_SECOND);
         Init(config);
+
+        if (!requiresJumpStart)
+        {
+            Activate();
+        }
     }
 
     public void Init(AIConfig config)
@@ -75,6 +83,12 @@ public class AIController : MonoBehaviour
     private string[] targetLayers(Faction faction)
     {
         return faction == Faction.ENEMY ? ENEMY_TARGET_LAYERS : ALLY_TARGET_LAYERS;
+    }
+
+    public void Activate()
+    {
+        InvokeRepeating("AcquireTarget", 0.0f, 1.0f / ACQUIRE_TARGETS_PER_SECOND);
+        state = State.IDLE;
     }
 
     // Update is called once per frame
@@ -139,6 +153,10 @@ public class AIController : MonoBehaviour
             state = State.DEAD;
             return;
         }
+        if (state == State.SLEEP)
+        {
+            return;
+        }
 
         if (hasTarget())
         {
@@ -162,6 +180,10 @@ public class AIController : MonoBehaviour
     {
         switch(state)
         {
+            case State.SLEEP:
+                idleRoutine.enabled = false;
+                attackRoutine.enabled = false;
+                break;
             case State.IDLE:
                 idleRoutine.enabled = true;
                 attackRoutine.enabled = false;
@@ -183,6 +205,11 @@ public class AIController : MonoBehaviour
 
     private void handleMoving()
     {
+        if (state == State.SLEEP)
+        {
+            return;
+        }
+
         if (Vector2.Distance(myPosition, TargetLocation) > TARGET_LOCATION_MARGIN)
         {
             rb.velocity = (TargetLocation - myPosition).normalized * config.MoveSpeed;
@@ -195,6 +222,11 @@ public class AIController : MonoBehaviour
 
     private void handleRotation()
     {
+        if (state == State.SLEEP)
+        {
+            return;
+        }
+
         var rotation = Vector2.SignedAngle(transform.up, TargetDirection);
         var maxRotationPerTick = Time.deltaTime * config.TurnSpeed;
         var rotationPerTick = Mathf.Clamp(rotation, -maxRotationPerTick, maxRotationPerTick);
@@ -203,6 +235,11 @@ public class AIController : MonoBehaviour
 
     public void Shoot()
     {
+        if (state == State.SLEEP)
+        {
+            return;
+        }
+
         gun.Shoot();
     }
 
@@ -218,6 +255,7 @@ public class AIController : MonoBehaviour
 
     private enum State
     {
+        SLEEP,
         IDLE,
         ATTACK,
         DEAD
