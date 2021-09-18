@@ -37,6 +37,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             gun.Shoot();
+            SoundManager.main.PlaySoundLoop(GameSoundType.GunShoot);
         }
 
         var targetDir = AimTarget.position - transform.position;

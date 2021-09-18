@@ -152,6 +152,7 @@ public class AIController : MonoBehaviour
     {
         if (character.Dead)
         {
+            SoundManager.main.PlaySound(GameSoundType.RobotDie);
             state = State.DEAD;
             return;
         }
@@ -243,6 +244,7 @@ public class AIController : MonoBehaviour
         }
 
         gun.Shoot();
+        SoundManager.main.PlaySoundLoop(GameSoundType.RobotShoot);
     }
 
     public void ScaleMoveSpeed(float scale)
