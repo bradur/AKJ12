@@ -10,6 +10,7 @@ public class PostProcessingEffects : MonoBehaviour
 
     public VolumeProfile profile;
     public ChromaticAberration chrAberration;
+    public Vignette vignette;
 
     private float playerDamagedTimer = -1;
 
@@ -19,6 +20,7 @@ public class PostProcessingEffects : MonoBehaviour
         profile = GetComponent<Volume>()?.profile;
         if (!profile) throw new System.NullReferenceException(nameof(VolumeProfile));
         if (!profile.TryGet(out chrAberration)) throw new System.NullReferenceException(nameof(chrAberration));
+        if (!profile.TryGet(out vignette)) throw new System.NullReferenceException(nameof(vignette));
     }
 
     // Start is called before the first frame update
@@ -35,6 +37,8 @@ public class PostProcessingEffects : MonoBehaviour
             var t = (playerDamagedTimer + 0.5f) - Time.time;
             t = Mathf.Clamp(t * 2.0f, 0.0f, 1.0f);
             chrAberration.intensity.Override(t * 2);
+
+            vignette.intensity.Override(t / 2.0f);
         }
     }
 
@@ -48,7 +52,17 @@ public class PostProcessingEffects : MonoBehaviour
         options.DampingSpeed = 0.8f;
         options.Enabled = true;
         ScreenShakeEffect.main.Shake(options);
+        
+    }
 
+    public void EnemyDamaged()
+    {
+        var options = new ScreenShakeOptions();
+        options.ShakeDuration = 0.2f;
+        options.ShakeMagnitude = 0.05f;
+        options.DampingSpeed = 0.8f;
+        options.Enabled = true;
+        ScreenShakeEffect.main.Shake(options);
         ScreenFlashEffect.main.Flash();
     }
 }

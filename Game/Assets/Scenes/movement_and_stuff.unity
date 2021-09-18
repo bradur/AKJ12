@@ -2550,6 +2550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profile: {fileID: 0}
   chrAberration: {fileID: 0}
+  vignette: {fileID: 0}
 --- !u!114 &2112072679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,7 +2582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultOptions:
-    FlashColor: {r: 1, g: 0.6179246, b: 0.6179246, a: 0.40392157}
+    FlashColor: {r: 0.7735849, g: 0.59132373, b: 0.4269313, a: 0.3254902}
     FlashDuration: 0.1
     FlashBack: 1
     FlashDurationBack: 0.2

@@ -61,12 +61,14 @@ public class Gun : MonoBehaviour
                 var character = hit.collider.GetComponent<Character>();
                 if (character != null)
                 {
-                    PostProcessingEffects.Main.PlayerDamaged();
                     var damage = Random.Range(minDamage, maxDamage);
                     character.Hurt(damage);
-                    if (hit.collider.gameObject.tag == "Player") {
+                    if (hit.collider.gameObject.tag == "Player")
+                    {
+                        PostProcessingEffects.Main.PlayerDamaged();
                     } else {
                         SoundManager.main.PlaySound(GameSoundType.RobotHit);
+                        PostProcessingEffects.Main.EnemyDamaged();
                     }
                 }
                 HitEffect.transform.position = hit.point;
