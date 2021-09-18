@@ -2,25 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectionIndicator : MonoBehaviour
+public class MinigameSelectionIndicator : MonoBehaviour
 {
     [SerializeField]
     private IndicatorOptions defaultOptions;
+    [SerializeField]
+    private Minigame minigame;
     private IndicatorOptions options;
 
     private InputConfig inputConfig;
 
     private bool finished = false;
-    private bool canBeStarted = false;
+    private bool canBeStarted = true;
 
     private Vector2 parentSize;
 
     private IndicatorDirection currentDirection;
+    private RectTransform rectTransform;
+
 
     private void Start() {
         parentSize = transform.parent.GetComponent<RectTransform>().sizeDelta;
-        Debug.Log(parentSize);
-        Debug.Log(transform.position);
+        rectTransform = GetComponent<RectTransform>();
+        inputConfig = Configs.main.InputConfig;
+        Initialize();
     }
 
     public void Initialize()
@@ -31,6 +36,9 @@ public class SelectionIndicator : MonoBehaviour
     public void Initialize(IndicatorOptions newOptions)
     {
         options = newOptions;
+        if (minigame == null) {
+            throw new System.Exception("MinigameSelectionIndicator needs minigame!");
+        }
         Reset();
     }
 
@@ -40,16 +48,18 @@ public class SelectionIndicator : MonoBehaviour
 
     public void Disable() {
         canBeStarted = false;
+        Reset();
     }
 
     private void Reset() {
+        started = false;
         currentDirection = options.Direction;
-        transform.position = new Vector2(
-            transform.position.x,
-            options.StartPercentage
+        Vector2 anchoredPos = rectTransform.anchoredPosition;
+        rectTransform.anchoredPosition = new Vector2(
+            anchoredPos.x,
+            parentSize.y * (options.StartPercentage / 100f)
         );
     }
-
 
     private bool warned = false;
     private void Update()
@@ -76,24 +86,41 @@ public class SelectionIndicator : MonoBehaviour
 
 
     private int GetDirectionFactor() {
-        return currentDirection == IndicatorDirection.Up ? -1 : 1;
+        return currentDirection == IndicatorDirection.Up ? 1 : -1;
     }
 
     private void HandleMoving() {
-        transform.position = new Vector2(
-            transform.position.x,
-            transform.position.y + GetDirectionFactor() * (options.Speed * Time.deltaTime)
+        Vector2 anchoredPos = rectTransform.anchoredPosition;
+        float newY = anchoredPos.y + GetDirectionFactor() * (options.Speed * Time.deltaTime);
+        rectTransform.anchoredPosition = new Vector2(
+            anchoredPos.x,
+            Mathf.Clamp(newY, 0f, parentSize.y)
         );
-        //transform.position options.Speed
+        if (newY > parentSize.y) {
+            currentDirection = IndicatorDirection.Down;
+        } else if (newY <= 0) {
+            currentDirection = IndicatorDirection.Up;
+        }
     }
-
 
     private bool started = false;
     private void HandleWhenStarted()
     {
         HandleMoving();
         if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStop)) {
+            MakeSelection();
+        }
+    }
 
+    private void MakeSelection() {
+
+        int selectionPosition = (int)(rectTransform.anchoredPosition.y / parentSize.y * 100f);
+        bool areaWasHit = minigame.MakeSelection(selectionPosition);
+        if (!areaWasHit) {
+            Reset();
+        } else {
+            started = false;
+            finished = true;
         }
     }
 
@@ -116,6 +143,7 @@ public enum IndicatorDirection
 public class IndicatorOptions
 {
     public float Speed;
+    [Range(0, 100)]
     public int StartPercentage;
     public IndicatorDirection Direction;
 }
