@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    private CharacterConfig config;
+    private float health;
+
     public Faction Faction
     {
         get; private set;
@@ -14,8 +17,10 @@ public class Character : MonoBehaviour
         get; private set;
     }
 
-    public void Init(Faction faction)
+    public void Init(Faction faction, CharacterConfig config)
     {
+        this.config = config;
+        health = config.Health;
         Faction = faction;
         CharacterManager.Main.register(this);
     }
@@ -33,6 +38,11 @@ public class Character : MonoBehaviour
 
     public void Hurt(float damage)
     {
+        health -= damage;
+        if (health <= 0)
+        {
+            Kill();
+        }
         Debug.Log("OUCH");
     }
 

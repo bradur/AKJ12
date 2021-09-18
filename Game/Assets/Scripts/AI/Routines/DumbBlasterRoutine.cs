@@ -35,12 +35,10 @@ public class DumbBlasterRoutine : AttackRoutine
 
     void OnDisable()
     {
-        Debug.Log("DISABLED", this);
     }
 
     void OnEnable()
     {
-        Debug.Log("ENABLED", this);
     }
 
     override public void SetTarget(Character target)

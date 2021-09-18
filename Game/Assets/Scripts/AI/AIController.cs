@@ -56,7 +56,7 @@ public class AIController : MonoBehaviour
     public void Init(AIConfig config)
     {
         this.config = config;
-        character.Init(config.Faction);
+        character.Init(config.Faction, config.CharacterConfig);
         idleRoutine = IdleRoutine.addToGameObject(this, config.IdleType);
         attackRoutine = AttackRoutine.addToGameObject(this, config.AttackType);
         targetFaction = config.Faction == Faction.ENEMY ? Faction.PLAYER : Faction.ENEMY;
@@ -75,12 +75,18 @@ public class AIController : MonoBehaviour
     {
         handleState();
         handleRoutines();
-        handleRotation();
+        if (isAlive())
+        {
+            handleRotation();
+        }
     }
 
     void FixedUpdate()
     {
-        handleMoving();
+        if (isAlive())
+        {
+            handleMoving();
+        }
     }
 
     void Die()
@@ -117,6 +123,12 @@ public class AIController : MonoBehaviour
 
     private void handleState()
     {
+        if (character.Dead)
+        {
+            state = State.DEAD;
+            return;
+        }
+
         if (hasTarget())
         {
             if (target.Dead)
@@ -147,6 +159,10 @@ public class AIController : MonoBehaviour
                 idleRoutine.enabled = false;
                 attackRoutine.enabled = true;
                 attackRoutine.SetTarget(target);
+                break;
+            case State.DEAD:
+                idleRoutine.enabled = false;
+                attackRoutine.enabled = false;
                 break;
             default:
                 Debug.LogError("Unexpected state " + state);
@@ -184,9 +200,15 @@ public class AIController : MonoBehaviour
         return target != null;
     }
 
+    private bool isAlive()
+    {
+        return state != State.DEAD;
+    }
+
     private enum State
     {
         IDLE,
-        ATTACK
+        ATTACK,
+        DEAD
     }
 }

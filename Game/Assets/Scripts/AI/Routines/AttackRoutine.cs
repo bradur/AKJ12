@@ -20,8 +20,9 @@ public abstract class AttackRoutine : MonoBehaviour
                 blasterRoutine.Init(controller);
                 return blasterRoutine;
             case Type.STRAFER:
-                Debug.LogError("Unimplemented AttackRoutine type: " + type);
-                return null;
+                var straferRoutine = controller.gameObject.AddComponent<StrafingBlasterRoutine>();
+                straferRoutine.Init(controller);
+                return straferRoutine;
             default:
                 Debug.LogError("Unimplemented AttackRoutine type: " + type);
                 return null;

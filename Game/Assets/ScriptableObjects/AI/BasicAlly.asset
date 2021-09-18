@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: BasicAlly
   m_EditorClassIdentifier: 
   IdleType: 0
-  AttackType: 0
+  AttackType: 1
   Faction: 0
   AggroRange: 5
   MoveSpeed: 5
   TurnSpeed: 180
   FireRate: 2
   GunConfig: {fileID: 11400000, guid: 27b3115e6762b8744b057d3b06eed3bb, type: 2}
+  CharacterConfig: {fileID: 11400000, guid: 3eac9bda4485fc248b9bbc3d8d975045, type: 2}

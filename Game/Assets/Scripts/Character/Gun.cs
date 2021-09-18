@@ -51,8 +51,7 @@ public class Gun : MonoBehaviour
 
             readyToFire = false;
             Invoke("ReadyToFire", 1.0f / config.FireRate);
-
-            Debug.Log("PEW");
+            
             Debug.DrawLine(Muzzle.position, Muzzle.position + targetDirection.normalized * config.Range, Color.red, 0.1f);
         }
     }

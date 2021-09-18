@@ -18,14 +18,12 @@ public class PatrolRoutine : IdleRoutine
     void OnDisable()
     {
         CancelInvoke("PickNewTargetLocation");
-        Debug.Log("DISABLED", this);
     }
 
     void OnEnable()
     {
         var idleTime = Random.Range(config.MinIdleTime, config.MaxIdleTime);
         Invoke("PickNewTargetLocation", idleTime);
-        Debug.Log("ENABLED", this);
     }
 
     // Start is called before the first frame update
