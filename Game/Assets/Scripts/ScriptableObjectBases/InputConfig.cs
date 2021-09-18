@@ -20,6 +20,10 @@ public class InputConfig : ScriptableObject
         return hotKey;
     }
 
+    public KeyCode GetKeyByAction(GameAction action) {
+        return FindKey(action).Key;
+    }
+
     public bool GetKeyUp(GameAction action)
     {
         return Input.GetKeyUp(FindKey(action).Key);

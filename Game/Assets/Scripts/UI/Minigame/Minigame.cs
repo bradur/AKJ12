@@ -24,6 +24,9 @@ public class Minigame : MonoBehaviour
 
     public MinigameTrigger Trigger { get; private set; }
 
+    [SerializeField]
+    private MinigameInfo minigameInfo;
+
     public void Initialize(
         MinigameTrigger trigger,
         MinigameOptions newOptions,
@@ -44,17 +47,23 @@ public class Minigame : MonoBehaviour
         indicator.Initialize(options.IndicatorOptions);
     }
 
+    public void ResetInfo() {
+        minigameInfo.SetText($"Press {Configs.main.InputConfig.GetKeyByAction(GameAction.MiniGameIndicatorStart)} to start.");
+    }
+
     public void Reset()
     {
-        /*animator.ResetTrigger("Show");
-        animator.ResetTrigger("Hide");
-        animator.SetTrigger("Reset");*/
+        ResetInfo();
         animator.Play("minigameIdle");
         areas = new List<MinigameArea>();
         foreach (Transform child in areaContainer)
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void Started() {
+        minigameInfo.SetText($"Press {Configs.main.InputConfig.GetKeyByAction(GameAction.MiniGameIndicatorStop)} at the correct position!");
     }
 
     public void SetPosition(Vector2 minigamePosition)
@@ -80,8 +89,10 @@ public class Minigame : MonoBehaviour
         }
         else if (area.Options.Result == SelectionResult.None)
         {
+            ResetInfo();
             return false;
         }
+        minigameInfo.Hide();
         Trigger.Finish();
         indicator.Disable();
         return true;
@@ -124,10 +135,12 @@ public class Minigame : MonoBehaviour
         //animator.SetTrigger("Hide");
         animator.Play("hideMinigame");
         indicator.Disable();
+        minigameInfo.Hide();
     }
 
     public void ShowFinished()
     {
+        minigameInfo.Show();
         indicator.Enable();
         IsShown = true;
     }

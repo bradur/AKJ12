@@ -32,6 +32,7 @@ public class MinigameSelectionIndicator : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         inputConfig = Configs.main.InputConfig;
         options = newOptions;
+        finished = false;
         if (minigame == null) {
             throw new System.Exception("MinigameSelectionIndicator needs minigame!");
         }
@@ -56,17 +57,9 @@ public class MinigameSelectionIndicator : MonoBehaviour
         );
     }
 
-    private bool warned = false;
     private void Update()
     {
-        if (finished || !canBeStarted) {
-            return;
-        }
-        if (inputConfig == null) {
-            if (!warned) {
-                Debug.Log("SelectionIndicator needs InputConfig!");
-                warned = true;
-            }
+        if (finished || !canBeStarted || inputConfig == null) {
             return;
         }
         if (started)
@@ -121,6 +114,7 @@ public class MinigameSelectionIndicator : MonoBehaviour
 
     private void HandleWhenStopped() {
         if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStart)) {
+            minigame.Started();
             started = true;
         }
     }
