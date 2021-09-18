@@ -58,6 +58,11 @@ public class Gun : MonoBehaviour
                 {
                     var damage = Random.Range(config.MinDamage, config.MaxDamage);
                     character.Hurt(damage);
+                    if (hit.collider.gameObject.tag == "Player") {
+                        //
+                    } else {
+                        SoundManager.main.PlaySound(GameSoundType.RobotHit);
+                    }
                 }
                 HitEffect.transform.position = hit.point;
                 HitEffect.Play();

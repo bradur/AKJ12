@@ -50,13 +50,33 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+
+    public void PlaySoundLoop(GameSoundType soundType)
+    {
+        if (soundType == GameSoundType.None)
+        {
+            return;
+        }
+        GameSound gameSound = gameSounds.Where(sound => sound.Type == soundType && sound.Loop).FirstOrDefault();
+        if (gameSound != null)
+        {
+            AudioSource audio = gameSound.GetLoop();
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
+        }
+    }
 }
 
 public enum GameSoundType
 {
     None,
     RobotHit,
+    RobotDie,
     GunShoot,
+    RobotShoot,
     PlayerHurt,
     FactoryBuild,
     MinigamePing,
@@ -76,6 +96,9 @@ public class GameSound
     private List<GameSoundPool> soundPools = new List<GameSoundPool>();
     private bool initialized = false;
 
+    [field: SerializeField]
+    public bool Loop { get; private set;} = false;
+
     public AudioSource Get()
     {
         if (!initialized)
@@ -88,6 +111,20 @@ public class GameSound
             return null;
         }
         return soundPools[Random.Range(0, soundPools.Count)].getAvailable();
+    }
+
+    public AudioSource GetLoop()
+    {
+        if (!initialized)
+        {
+            initialize();
+        }
+
+        if (sounds == null || sounds.Count == 0)
+        {
+            return null;
+        }
+        return soundPools[Random.Range(0, soundPools.Count)].getAvailableLoop();
     }
 
     private void initialize()
@@ -106,6 +143,15 @@ public class GameSound
         {
             originalAudioSource = audioSource;
             addNewToPool();
+        }
+
+        public AudioSource getAvailableLoop() {
+            var src = audioSources.First();
+            if (src == null)
+            {
+                src = addNewToPool();
+            }
+            return src;
         }
 
         public AudioSource getAvailable()
