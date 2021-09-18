@@ -38,6 +38,7 @@ public class AIController : MonoBehaviour
     private Rigidbody2D rb;
     private Gun gun;
     private Destroyed destroyed;
+    private float movementSpeed;
 
     private Vector2 myPosition
     {
@@ -78,6 +79,7 @@ public class AIController : MonoBehaviour
 
         var layerName = config.Faction == Faction.ENEMY ? ENEMY_LAYER : ALLY_LAYER;
         gameObject.layer = LayerMask.NameToLayer(layerName);
+        movementSpeed = config.MoveSpeed;
     }
 
     private string[] targetLayers(Faction faction)
@@ -178,7 +180,7 @@ public class AIController : MonoBehaviour
 
     private void handleRoutines()
     {
-        switch(state)
+        switch (state)
         {
             case State.SLEEP:
                 idleRoutine.enabled = false;
@@ -212,7 +214,7 @@ public class AIController : MonoBehaviour
 
         if (Vector2.Distance(myPosition, TargetLocation) > TARGET_LOCATION_MARGIN)
         {
-            rb.velocity = (TargetLocation - myPosition).normalized * config.MoveSpeed;
+            rb.velocity = (TargetLocation - myPosition).normalized * movementSpeed;
         }
         else
         {
@@ -241,6 +243,23 @@ public class AIController : MonoBehaviour
         }
 
         gun.Shoot();
+    }
+
+    public void ScaleMoveSpeed(float scale)
+    {
+        movementSpeed = movementSpeed * scale;
+    }
+
+    public void ScaleStat(ScalingStat stat, float scale) {
+        if(stat == ScalingStat.Health) {
+            character.ScaleHealth(scale);
+        }
+        else if(stat == ScalingStat.Damage) {
+            gun.ScaleDamage(scale);
+        }
+        else if(stat == ScalingStat.Speed) {
+            ScaleMoveSpeed(scale);
+        }
     }
 
     private bool hasTarget()

@@ -57,5 +57,6 @@ public enum SelectionResult
 {
     None,
     Positive,
-    Negative
+    Negative,
+    Restart
 }

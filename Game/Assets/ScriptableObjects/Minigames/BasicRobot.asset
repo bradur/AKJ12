@@ -21,15 +21,23 @@ MonoBehaviour:
         StartPercentage: 20
         Direction: 2
       Areas:
-      - PercentageSize: 25
-        Color: {r: 0.14747167, g: 1, b: 0, a: 1}
+      - PercentageSize: 10
+        Color: {r: 0.5566038, g: 0, b: 0, a: 1}
+        ResultValue: 50
+        Result: 2
+      - PercentageSize: 12
+        Color: {r: 0.10106132, g: 0.5, b: 0.03066039, a: 1}
         ResultValue: 100
+        Result: 0
+      - PercentageSize: 24
+        Color: {r: 0.14747167, g: 1, b: 0, a: 1}
+        ResultValue: 80
         Result: 1
-      - PercentageSize: 40
+      - PercentageSize: 24
         Color: {r: 1, g: 0.9831023, b: 0, a: 1}
         ResultValue: 50
         Result: 1
-      - PercentageSize: 35
+      - PercentageSize: 30
         Color: {r: 1, g: 1, b: 1, a: 1}
         ResultValue: 1
         Result: 0

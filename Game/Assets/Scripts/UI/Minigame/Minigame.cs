@@ -17,6 +17,7 @@ public class Minigame : MonoBehaviour
 
     private UnityAction<int, Vector2> PositiveCallback;
     private UnityAction<int, Vector2> NegativeCallback;
+    private UnityAction<int, Vector2> RestartCallback;
 
     public bool IsShown { get; private set; }
 
@@ -31,7 +32,8 @@ public class Minigame : MonoBehaviour
         MinigameTrigger trigger,
         MinigameOptions newOptions,
         UnityAction<int, Vector2> PositiveCallback,
-        UnityAction<int, Vector2> NegativeCallback
+        UnityAction<int, Vector2> NegativeCallback,
+        UnityAction<int, Vector2> RestartCallback
     )
     {
         Trigger = trigger;
@@ -43,6 +45,7 @@ public class Minigame : MonoBehaviour
         options = newOptions;
         this.PositiveCallback = PositiveCallback;
         this.NegativeCallback = NegativeCallback;
+        this.RestartCallback = RestartCallback;
         SetUpAreas();
         indicator.Initialize(options.IndicatorOptions);
     }
@@ -86,6 +89,12 @@ public class Minigame : MonoBehaviour
         else if (area.Options.Result == SelectionResult.Negative)
         {
             NegativeResult(area.Options.ResultValue, selectionPosition);
+        }
+        else if (area.Options.Result == SelectionResult.Restart)
+        {
+            RestartResult(area.Options.ResultValue, selectionPosition);
+            ResetInfo();
+            return false;
         }
         else if (area.Options.Result == SelectionResult.None)
         {
@@ -181,6 +190,17 @@ public class Minigame : MonoBehaviour
         else
         {
             Debug.Log($"Minigame {name} doesn't have NegativeCallback!");
+        }
+    }
+    public void RestartResult(int value, Vector2 resultPosition)
+    {
+        if (RestartCallback != null)
+        {
+            RestartCallback(value, resultPosition);
+        }
+        else
+        {
+            Debug.Log($"Minigame {name} doesn't have RestartCallback!");
         }
     }
 }

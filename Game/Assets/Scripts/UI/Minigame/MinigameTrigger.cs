@@ -34,7 +34,7 @@ public class MinigameTrigger : MonoBehaviour
         if (minigame.Trigger != this)
         {
             if (minigame.Trigger == null || (minigame.Trigger.DistanceFromTrigger() >= DistanceFromTrigger())) {
-                minigame.Initialize(this, options.MinigameOptions, options.PositiveAction, options.NegativeAction);
+                minigame.Initialize(this, options.MinigameOptions, options.PositiveAction, options.NegativeAction, options.RestartAction);
                 minigame.SetPosition(transform.position);
                 Debug.Log($"minigame pos to {transform.position}");
             }
@@ -94,4 +94,5 @@ public class MinigameTriggerOptions
     public MinigameOptions MinigameOptions;
     public UnityAction<int, Vector2> PositiveAction;
     public UnityAction<int, Vector2> NegativeAction;
+    public UnityAction<int, Vector2> RestartAction;
 }

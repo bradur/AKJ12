@@ -21,11 +21,16 @@ public class Factory : MonoBehaviour
 
     [SerializeField]
     private MinigameConfig minigameConfig;
+    [SerializeField]
+    private StatScalingConfig positiveScaling;
+    [SerializeField]
+    private StatScalingConfig negativeScaling;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (minigameConfig == null) {
+        if (minigameConfig == null)
+        {
             Debug.LogError("Factory needs a MinigameConfig!");
         }
         unloadTrigger = GetComponentsInChildren<UnloadParts>()[0];
@@ -61,21 +66,68 @@ public class Factory : MonoBehaviour
         }
     }
 
-    private void SetupMinigame(GameObject allyRobot) {
-        MinigameTrigger minigameTrigger = allyRobot.GetComponentInChildren<MinigameTrigger>();
-        minigameConfig.Options.PositiveAction = delegate(int value, Vector2 pos) {
+    private UnityEngine.Events.UnityAction<int, Vector2> PositiveMinigameAction(AIController aiController)
+    {
+        return delegate (int value, Vector2 pos)
+        {
             PoppingTextOptions textOptions = new PoppingTextOptions();
             textOptions.Color = value == 100 ? Color.green : Color.yellow;
-            textOptions.Text = value == 100 ? $"Great!" : "OK!";
+            string text = "";
+
+            if (value == 100)
+            {
+                text += "Awesome!";
+                ScalingStat stat1 = positiveScaling.getRandomStat();
+                aiController.ScaleStat(stat1, positiveScaling.getStatScale(stat1));
+                ScalingStat stat2 = positiveScaling.getRandomStat();
+                aiController.ScaleStat(stat2, positiveScaling.getStatScale(stat2));
+                text += $"\n+{stat1.ToString()}";
+                text += $"\n+{stat2.ToString()}";
+            }
+            else if (value == 80)
+            {
+                text += "Great!";
+                ScalingStat stat1 = positiveScaling.getRandomStat();
+                aiController.ScaleStat(stat1, positiveScaling.getStatScale(stat1));
+                text += $"\n+{stat1.ToString()}";
+            }
+            else
+            {
+                text += "OK!";
+            }
+            textOptions.Text = text;
             textOptions.Position = pos;
             WorldUI.main.ShowPoppingText(textOptions);
-            AIController aiController = allyRobot.GetComponentInChildren<AIController>();
             aiController.Activate();
         };
-        minigameConfig.Options.NegativeAction = delegate(int value, Vector2 pos) {
+    }
+
+    private UnityEngine.Events.UnityAction<int, Vector2> NegativeMinigameAction(AIController aiController, GameObject allyRobot)
+    {
+        return delegate (int value, Vector2 pos)
+        {
             PoppingTextOptions textOptions = new PoppingTextOptions();
             textOptions.Color = Color.red;
-            textOptions.Text = $"Boom you died!";
+            ScalingStat stat1 = negativeScaling.getRandomStat();
+            aiController.ScaleStat(stat1, negativeScaling.getStatScale(stat1));
+            textOptions.Text = $"Bad kickstart!\n-{stat1.ToString()}";
+            textOptions.Position = pos;
+            aiController.Activate();
+            WorldUI.main.ShowPoppingText(textOptions);
+        };
+    }
+
+    private void SetupMinigame(GameObject allyRobot)
+    {
+        MinigameTrigger minigameTrigger = allyRobot.GetComponentInChildren<MinigameTrigger>();
+        AIController aiController = allyRobot.GetComponentInChildren<AIController>();
+        minigameConfig.Options.PositiveAction = PositiveMinigameAction(aiController);
+        minigameConfig.Options.NegativeAction = NegativeMinigameAction(aiController, allyRobot);
+        minigameConfig.Options.RestartAction = delegate (int value, Vector2 pos)
+        {
+            PoppingTextOptions textOptions = new PoppingTextOptions();
+            textOptions.Color = Color.white;
+            textOptions.Text = $"Not quite! Try again.";
             textOptions.Position = pos;
             WorldUI.main.ShowPoppingText(textOptions);
         };

@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Hurt(float damage)
@@ -49,6 +49,11 @@ public class Character : MonoBehaviour
     {
         Dead = true;
         CharacterManager.Main.unregister(this);
+    }
+
+    public void ScaleHealth(float scale)
+    {
+        health = health * scale;
     }
 }
 

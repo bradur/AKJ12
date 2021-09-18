@@ -23,23 +23,28 @@ public class Gun : MonoBehaviour
     public ParticleSystem MuzzleFlash;
     public TrailRenderer BulletTrail;
 
+    private float minDamage = 0f;
+    private float maxDamage = 10f;
+
     public void Init(GunConfig config, string[] targetLayers)
     {
         this.config = config;
         var defaultMask = LayerMask.GetMask(DEFAULT_LAYERS);
         targetLayerMask = LayerMask.GetMask(targetLayers) | defaultMask;
+        minDamage = config.MinDamage;
+        maxDamage = config.MaxDamage;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Shoot()
@@ -48,7 +53,7 @@ public class Gun : MonoBehaviour
         {
             var inaccuracy = Random.Range(-config.Inaccuracy, config.Inaccuracy);
             var inaccuracyAdjustment = Quaternion.AngleAxis(inaccuracy, Vector3.forward);
-            
+
             var targetDirection = inaccuracyAdjustment * Muzzle.up;
             var hit = Physics2D.Raycast(Muzzle.position, targetDirection, config.Range, targetLayerMask);
             if (hit.collider != null)
@@ -56,7 +61,7 @@ public class Gun : MonoBehaviour
                 var character = hit.collider.GetComponent<Character>();
                 if (character != null)
                 {
-                    var damage = Random.Range(config.MinDamage, config.MaxDamage);
+                    var damage = Random.Range(minDamage, maxDamage);
                     character.Hurt(damage);
                 }
                 HitEffect.transform.position = hit.point;
@@ -89,5 +94,11 @@ public class Gun : MonoBehaviour
     void ReadyToFire()
     {
         readyToFire = true;
+    }
+
+    public void ScaleDamage(float scale)
+    {
+        minDamage = minDamage * scale;
+        maxDamage = maxDamage * scale;
     }
 }
