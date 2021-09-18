@@ -132,7 +132,7 @@ public enum IndicatorDirection
 public class IndicatorOptions
 {
     public float Speed;
-    [Range(0, 100)]
+    [Range(1, 100)]
     public int StartPercentage;
     public IndicatorDirection Direction;
 }
