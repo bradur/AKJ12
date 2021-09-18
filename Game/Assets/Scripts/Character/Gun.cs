@@ -61,10 +61,10 @@ public class Gun : MonoBehaviour
                 var character = hit.collider.GetComponent<Character>();
                 if (character != null)
                 {
+                    PostProcessingEffects.Main.PlayerDamaged();
                     var damage = Random.Range(minDamage, maxDamage);
                     character.Hurt(damage);
                     if (hit.collider.gameObject.tag == "Player") {
-                        //
                     } else {
                         SoundManager.main.PlaySound(GameSoundType.RobotHit);
                     }
