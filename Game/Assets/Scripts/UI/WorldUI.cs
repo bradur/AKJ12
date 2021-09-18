@@ -22,10 +22,13 @@ public class WorldUI : MonoBehaviour
         poppingText.Initialize(options);
     }
 
-    public Minigame CreateMinigame(Vector2 gamePosition) {
-        Minigame minigame = Prefabs.Get<Minigame>();
-        minigame.transform.SetParent(minigameContainer, false);
-        minigame.SetPosition(gamePosition);
+    private Minigame minigame;
+
+    public Minigame GetMinigame() {
+        if (minigame == null) {
+            minigame = Prefabs.Get<Minigame>();
+            minigame.transform.SetParent(minigameContainer, false);
+        }
         return minigame;
     }
 }
