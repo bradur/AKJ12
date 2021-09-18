@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
+    [SerializeField]
+    private int partsNeededCount;
+    [SerializeField]
+    private GameObject robotPrefab;
+    [SerializeField]
+    private Transform spawnPoint;
+
     private float partsValue = 0;
+
     private UnloadParts unloadTrigger;
+    private FactoryLightArray lightArray;
+    private bool assemblyOngoing = false;
+    private float assemblyStartedTime = 0;
+    private float assemblyDuration = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +27,14 @@ public class Factory : MonoBehaviour
         {
             unloadTrigger.Initialize(AddParts);
         }
-        else {
+        else
+        {
+            Debug.LogError("No Pickup script in RobotPart prefab children found!");
+        }
+
+        lightArray = GetComponentsInChildren<FactoryLightArray>()[0];
+        if (lightArray == null)
+        {
             Debug.LogError("No Pickup script in RobotPart prefab children found!");
         }
     }
@@ -23,11 +42,32 @@ public class Factory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (assemblyOngoing && Time.time - assemblyStartedTime > assemblyDuration)
+        {
+            assemblyOngoing = false;
+            Debug.Log(partsValue);
+            lightArray.SetActive(Mathf.FloorToInt(partsValue));
+            unloadTrigger.gameObject.SetActive(true);
+
+            GameObject allyRobot = Instantiate(robotPrefab);
+            allyRobot.transform.position = spawnPoint.position;
+            allyRobot.transform.parent = null; //TODO get container from manager
+        }
     }
 
-    public void AddParts(float value) {
+    public void AddParts(float value)
+    {
         partsValue += value;
         Debug.Log("Value " + partsValue);
+        lightArray.SetActive(Mathf.FloorToInt(partsValue));
+
+        if (partsValue >= partsNeededCount)
+        {
+            partsValue = 0; // If player can carry more than 1, should this be partsValue - partsNeedeCount?
+
+            unloadTrigger.gameObject.SetActive(false);
+            assemblyStartedTime = Time.time;
+            assemblyOngoing = true;
+        }
     }
 }
