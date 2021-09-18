@@ -21,13 +21,6 @@ public class MinigameSelectionIndicator : MonoBehaviour
     private RectTransform rectTransform;
 
 
-    private void Start() {
-        parentSize = transform.parent.GetComponent<RectTransform>().sizeDelta;
-        rectTransform = GetComponent<RectTransform>();
-        inputConfig = Configs.main.InputConfig;
-        Initialize();
-    }
-
     public void Initialize()
     {
         Initialize(defaultOptions);
@@ -35,6 +28,9 @@ public class MinigameSelectionIndicator : MonoBehaviour
 
     public void Initialize(IndicatorOptions newOptions)
     {
+        parentSize = transform.parent.GetComponent<RectTransform>().sizeDelta;
+        rectTransform = GetComponent<RectTransform>();
+        inputConfig = Configs.main.InputConfig;
         options = newOptions;
         if (minigame == null) {
             throw new System.Exception("MinigameSelectionIndicator needs minigame!");
@@ -115,7 +111,7 @@ public class MinigameSelectionIndicator : MonoBehaviour
     private void MakeSelection() {
 
         int selectionPosition = (int)(rectTransform.anchoredPosition.y / parentSize.y * 100f);
-        bool areaWasHit = minigame.MakeSelection(selectionPosition);
+        bool areaWasHit = minigame.MakeSelection(selectionPosition, transform.position);
         if (!areaWasHit) {
             Reset();
         } else {
