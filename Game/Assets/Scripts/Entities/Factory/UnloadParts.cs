@@ -26,7 +26,6 @@ public class UnloadParts : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
-            Debug.Log("Triggered!");
             PartPicker p = collider.GetComponent<PartPicker>();
             if (p != null) {
                 float value = p.UnloadParts();

@@ -51,13 +51,12 @@ public class Factory : MonoBehaviour
         if (assemblyOngoing && Time.time - assemblyStartedTime > assemblyDuration)
         {
             assemblyOngoing = false;
-            Debug.Log(partsValue);
             lightArray.SetActive(Mathf.FloorToInt(partsValue));
             unloadTrigger.gameObject.SetActive(true);
 
             GameObject allyRobot = Instantiate(robotPrefab);
             allyRobot.transform.position = spawnPoint.position;
-            allyRobot.transform.parent = null; //TODO get container from manager
+            allyRobot.transform.parent = ContainerManager.main.GetRobotContainer().transform;
             SetupMinigame(allyRobot);
         }
     }
@@ -86,7 +85,6 @@ public class Factory : MonoBehaviour
     public void AddParts(float value)
     {
         partsValue += value;
-        Debug.Log("Value " + partsValue);
         lightArray.SetActive(Mathf.FloorToInt(partsValue));
 
         if (partsValue >= partsNeededCount)
