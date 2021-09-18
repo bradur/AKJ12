@@ -59,6 +59,7 @@ public class Factory : MonoBehaviour
             lightArray.SetActive(Mathf.FloorToInt(partsValue));
             unloadTrigger.gameObject.SetActive(true);
 
+            SoundManager.main.PlaySound(GameSoundType.FactoryBuild);
             GameObject allyRobot = Instantiate(robotPrefab);
             allyRobot.transform.position = spawnPoint.position;
             allyRobot.transform.parent = ContainerManager.main.GetRobotContainer().transform;
