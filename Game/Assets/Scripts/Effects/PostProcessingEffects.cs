@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -10,6 +11,12 @@ public class PostProcessingEffects : MonoBehaviour
     public ParticleSystem bloodPuddle;
     [SerializeField]
     public ParticleSystem oilPuddle;
+    [SerializeField]
+    private CinemachineImpulseSource playerDamagedImpulseSource;
+    [SerializeField]
+    private CinemachineImpulseSource enemyDamagedImpulseSource;
+
+    
 
     public static PostProcessingEffects Main;
 
@@ -59,6 +66,7 @@ public class PostProcessingEffects : MonoBehaviour
         options.DampingSpeed = 0.8f;
         options.Enabled = true;
         ScreenShakeEffect.main.Shake(options);
+        playerDamagedImpulseSource.GenerateImpulse();
 
         bloodPuddle.transform.position = player.transform.position;
         bloodPuddle.Play();
@@ -73,6 +81,7 @@ public class PostProcessingEffects : MonoBehaviour
         options.Enabled = true;
         ScreenShakeEffect.main.Shake(options);
         ScreenFlashEffect.main.Flash();
+        enemyDamagedImpulseSource.GenerateImpulse();
 
         oilPuddle.transform.position = position;
         oilPuddle.Play();
