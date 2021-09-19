@@ -37,10 +37,10 @@ public abstract class IdleRoutine : MonoBehaviour
     private static PatrolRoutine.PatrolConfig defaultPatrolConfig()
     {
         var config = new PatrolRoutine.PatrolConfig();
-        config.PatrolAreaCenter = AIManager.Main.CenterOfArena;
-        config.PatrolRadius = 10.0f;
-        config.MinIdleTime = 5.0f;
-        config.MaxIdleTime = 8.0f;
+        config.PatrolAreaCenter = AIManager.Main.Player;
+        config.PatrolRadius = 5.0f;
+        config.MinIdleTime = 2.0f;
+        config.MaxIdleTime = 4.0f;
         return config;
     }
 }

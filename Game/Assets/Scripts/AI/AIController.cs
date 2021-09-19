@@ -161,7 +161,10 @@ public class AIController : MonoBehaviour
                 nearestDist = distance;
             }
         }
-        target = nearestTarget;
+        if (nearestTarget != null)
+        {
+            target = nearestTarget;
+        }
     }
 
     private void handleState()

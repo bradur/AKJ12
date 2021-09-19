@@ -20,7 +20,7 @@ public class DumbBlasterRoutine : AttackRoutine
     // Update is called once per frame
     void Update()
     {
-        controller.TargetLocation = transform.position;
+        controller.TargetLocation = target.transform.position;
         if (target != null)
         {
             Vector2 targetDir = target.transform.position - transform.position;
