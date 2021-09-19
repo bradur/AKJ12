@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PartPicker : MonoBehaviour
 {
-    private int maxParts = 10;
+    private int maxParts = 99999;
     private int partsCollected = 0;
     private float totalValue = 0;
 
@@ -72,11 +72,11 @@ public class PartPicker : MonoBehaviour
         }
     }
 
-    public float UnloadParts()
+    public float UnloadParts(int partsNeeded)
     {
         float value = totalValue;
-        partsCollected = 0;
-        totalValue = 0;
+        totalValue -= System.Math.Min(partsNeeded, partsCollected);
+        partsCollected -= System.Math.Min(partsNeeded, partsCollected);
         UIRoboParts.main.SetValue(partsCollected, true);
         HideFactoryInfo();
         return value;

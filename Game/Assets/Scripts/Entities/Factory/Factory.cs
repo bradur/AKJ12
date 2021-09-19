@@ -37,7 +37,7 @@ public class Factory : MonoBehaviour
         unloadTrigger = GetComponentsInChildren<UnloadParts>()[0];
         if (unloadTrigger != null)
         {
-            unloadTrigger.Initialize(AddParts);
+            unloadTrigger.Initialize(AddParts, partsNeededCount);
         }
         else
         {
@@ -170,7 +170,7 @@ public class Factory : MonoBehaviour
 
         if (partsValue >= partsNeededCount)
         {
-            partsValue = 0; // If player can carry more than 1, should this be partsValue - partsNeedeCount?
+            partsValue = 0;
 
             unloadTrigger.gameObject.SetActive(false);
             assemblyStartedTime = Time.time;
