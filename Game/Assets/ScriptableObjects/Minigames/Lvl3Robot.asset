@@ -17,7 +17,7 @@ MonoBehaviour:
     Radius: 1.6
     MinigameOptions:
       IndicatorOptions:
-        Speed: 200
+        Speed: 400
         StartPercentage: 20
         Direction: 2
       Areas:
