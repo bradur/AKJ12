@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300475995226cd64f9920ebc6f4958c5, type: 3}
   m_Name: PlayerBlaster
   m_EditorClassIdentifier: 
-  MinDamage: 3
-  MaxDamage: 4
+  MinDamage: 2
+  MaxDamage: 3
   FireRate: 15
   Range: 7
   Inaccuracy: 5
