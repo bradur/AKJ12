@@ -8,12 +8,14 @@ public class PostProcessingEffects : MonoBehaviour
 {
     [SerializeField]
     public ParticleSystem bloodPuddle;
+    [SerializeField]
+    public ParticleSystem oilPuddle;
 
     public static PostProcessingEffects Main;
 
-    public VolumeProfile profile;
-    public ChromaticAberration chrAberration;
-    public Vignette vignette;
+    private VolumeProfile profile;
+    private ChromaticAberration chrAberration;
+    private Vignette vignette;
 
     private float playerDamagedTimer = -1;
 
@@ -62,7 +64,7 @@ public class PostProcessingEffects : MonoBehaviour
         bloodPuddle.Play();
     }
 
-    public void EnemyDamaged()
+    public void EnemyDamaged(Vector2 position)
     {
         var options = new ScreenShakeOptions();
         options.ShakeDuration = 0.2f;
@@ -71,5 +73,8 @@ public class PostProcessingEffects : MonoBehaviour
         options.Enabled = true;
         ScreenShakeEffect.main.Shake(options);
         ScreenFlashEffect.main.Flash();
+
+        oilPuddle.transform.position = position;
+        oilPuddle.Play();
     }
 }
