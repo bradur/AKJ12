@@ -35,6 +35,7 @@ public class PostProcessingEffects : MonoBehaviour
         if (!profile) throw new System.NullReferenceException(nameof(VolumeProfile));
         if (!profile.TryGet(out chrAberration)) throw new System.NullReferenceException(nameof(chrAberration));
         if (!profile.TryGet(out vignette)) throw new System.NullReferenceException(nameof(vignette));
+        if (!profile.TryGet(out motionBlur)) throw new System.NullReferenceException(nameof(motionBlur));
     }
 
     // Start is called before the first frame update
