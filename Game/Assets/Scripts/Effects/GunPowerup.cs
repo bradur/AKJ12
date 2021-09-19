@@ -18,9 +18,27 @@ public class GunPowerup : MonoBehaviour
 
     int level = 0;
     // Start is called before the first frame update
+    MinigameInfo powerupInfo;
     void Start()
     {
         playerGun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Gun>();
+        ShowPowerUpInfo();
+    }
+
+    private void ShowPowerUpInfo() {
+        if (requiredScore.Length <= level) {
+            return;
+        }
+        if (powerupInfo == null) {
+            powerupInfo = WorldUI.main.GetMinigameInfo($"Unlock with {requiredScore[level]} score", transform.position + Vector3.one, transform);
+        }
+        else {
+            powerupInfo.SetText($"Unlock with {requiredScore[level]} score");
+            powerupInfo.transform.position = transform.position + Vector3.one;
+        }
+        if (!powerupInfo.IsShown) {
+            powerupInfo.Show();
+        }
     }
 
     // Update is called once per frame
@@ -28,11 +46,13 @@ public class GunPowerup : MonoBehaviour
     {
         if (requiredScore.Length <= level)
         {
+            powerupInfo.Hide();
             Destroy(gameObject);
         }
 
         if (canUpgrade())
         {
+            powerupInfo.SetText("Unlock available! Walk here to unlock!");
             rend.color = availableColor;
         }
         else
@@ -44,6 +64,7 @@ public class GunPowerup : MonoBehaviour
     public void PowerUp()
     {
         level++;
+        ShowPowerUpInfo();
         playerGun.SetBulletsPerShot(level * 2 + 1);
     }
 
@@ -58,11 +79,6 @@ public class GunPowerup : MonoBehaviour
         {
             if (!canUpgrade())
             {
-                var options = new PoppingTextOptions();
-                options.Position = transform.position;
-                options.Color = Color.red;
-                options.Text = "Unlock with " + requiredScore[level] + " score";
-                WorldUI.main.ShowPoppingText(options);
                 return;
             }
 
