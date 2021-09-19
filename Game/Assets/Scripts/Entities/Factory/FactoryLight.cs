@@ -38,6 +38,9 @@ public class FactoryLight : MonoBehaviour
     public void SetOn()
     {
         lightOn = true;
+        if (spriteRenderer == null) {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         spriteRenderer.sprite = onSprite;
         spriteRenderer.material = onMaterial;
     }
@@ -45,6 +48,9 @@ public class FactoryLight : MonoBehaviour
     public void SetOff()
     {
         lightOn = false;
+        if (spriteRenderer == null) {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         spriteRenderer.sprite = offSprite;
         spriteRenderer.material = offMaterial;
     }

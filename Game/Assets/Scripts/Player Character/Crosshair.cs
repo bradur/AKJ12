@@ -4,17 +4,32 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public static Crosshair main;
+    private void Awake() {
+        main = this;
+    }
     void Start()
     {
+        Lock();
+    }
+
+    void Update()
+    {
+        if (Cursor.visible) {
+            return;
+        }
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = worldPos;
+    }
+
+    public void Lock() {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = worldPos;
+    public void Unlock() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

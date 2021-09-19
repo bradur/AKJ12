@@ -31,6 +31,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen) {
+            return;
+        }
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 

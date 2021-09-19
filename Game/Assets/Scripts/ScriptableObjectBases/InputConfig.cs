@@ -40,6 +40,10 @@ public enum GameAction
     None,
     MiniGameIndicatorStart,
     MiniGameIndicatorStop,
+    OpenPauseMenu,
+    MenuOpenMainMenu,
+    MenuContinue,
+    MenuRestart
 }
 
 [System.Serializable]

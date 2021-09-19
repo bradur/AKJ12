@@ -20,6 +20,14 @@ public class UITimer : MonoBehaviour
         timer = new Timer();
     }
 
+    public void Pause() {
+        timer.Pause();
+    }
+
+    public void Unpause() {
+        timer.Unpause();
+    }
+
     void Update()
     {
         if (timer != null) {
