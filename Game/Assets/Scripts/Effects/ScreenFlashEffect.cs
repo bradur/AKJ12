@@ -23,10 +23,31 @@ public class ScreenFlashEffect : MonoBehaviour
 
     private Color initialColor;
 
+    private bool allowFlashing = false;
+
     void Awake()
     {
         main = this;
+        Refresh();
     }
+
+    public void Refresh()
+    {
+        int shakeOn = PlayerPrefs.GetInt("screenFlash", 1);
+        if (shakeOn == 0)
+        {
+            flashing = false;
+            flash = false;
+            flashTimer = 0f;
+            imgTarget.color = initialColor;
+            allowFlashing = false;
+        }
+        else
+        {
+            allowFlashing = true;
+        }
+    }
+
 
     public void Flash(ScreenFlashOptions newOptions)
     {
@@ -49,7 +70,7 @@ public class ScreenFlashEffect : MonoBehaviour
 
     void Update()
     {
-        if (!flash)
+        if (!flash || !allowFlashing)
         {
             return;
         }
