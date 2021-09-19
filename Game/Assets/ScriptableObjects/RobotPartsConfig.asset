@@ -25,7 +25,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: c92572bbb5271e44f9ef398b36ac10aa, type: 3}
     probability: 0.33
     RobotPartType: 1
-  - value: 10
+  - value: 20
     sprite: {fileID: 21300000, guid: f848559f3b76e3a42b388e1c6b0dbf1a, type: 3}
     probability: 0.33
     RobotPartType: 2
+  chanceToDrop: 0.66

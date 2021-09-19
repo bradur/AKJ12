@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300475995226cd64f9920ebc6f4958c5, type: 3}
-  m_Name: EnemyBlaster
+  m_Name: Lvl3EnemyBlaster
   m_EditorClassIdentifier: 
-  MinDamage: 1
-  MaxDamage: 1
-  FireRate: 2
+  MinDamage: 3
+  MaxDamage: 5
+  FireRate: 1
   Range: 7
   Inaccuracy: 5

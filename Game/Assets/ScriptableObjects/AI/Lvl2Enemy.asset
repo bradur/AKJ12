@@ -18,7 +18,6 @@ MonoBehaviour:
   AggroRange: 5
   MoveSpeed: 3.5
   TurnSpeed: 200
-  FireRate: 3
-  GunConfig: {fileID: 11400000, guid: 27b3115e6762b8744b057d3b06eed3bb, type: 2}
+  GunConfig: {fileID: 11400000, guid: c07f1112579773b458e4bd9695a75fb5, type: 2}
   CharacterConfig: {fileID: 11400000, guid: 3eac9bda4485fc248b9bbc3d8d975045, type: 2}
   Score: 100
