@@ -181,6 +181,7 @@ public class AIController : MonoBehaviour
                 dieExplosion.transform.parent = null;
                 dieExplosion.Play();
                 dieFlash.Flash(0.5f);
+                PostProcessingEffects.Main.EnemyDied(transform.position);
             }
             SoundManager.main.PlaySound(GameSoundType.RobotDie);
             UIScore.main.AddValueAnimated(config.Score);

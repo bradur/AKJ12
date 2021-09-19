@@ -12,6 +12,8 @@ public class PostProcessingEffects : MonoBehaviour
     [SerializeField]
     public ParticleSystem oilPuddle;
     [SerializeField]
+    public ParticleSystem explosionHole;
+    [SerializeField]
     private CinemachineImpulseSource playerDamagedImpulseSource;
     [SerializeField]
     private CinemachineImpulseSource enemyDamagedImpulseSource;
@@ -87,5 +89,11 @@ public class PostProcessingEffects : MonoBehaviour
 
         oilPuddle.transform.position = position;
         oilPuddle.Play();
+    }
+
+    public void EnemyDied(Vector2 position)
+    {
+        explosionHole.transform.position = position;
+        explosionHole.Play();
     }
 }

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12334748c02109c40b959b606288e604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 20
+  Radius: 25
   InitialDelay: 5
   InitialEnemiesPerSecond: 0.05
   EnemiesPerSecondRampUp: 0.001
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12334748c02109c40b959b606288e604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 10
+  Radius: 25
   InitialDelay: 30
   InitialEnemiesPerSecond: 0.05
   EnemiesPerSecondRampUp: 0.001
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12334748c02109c40b959b606288e604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 20
+  Radius: 25
   InitialDelay: 60
   InitialEnemiesPerSecond: 0.05
   EnemiesPerSecondRampUp: 0.001
