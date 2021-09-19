@@ -68,6 +68,7 @@ public class AIController : MonoBehaviour
         else
         {
             character.SetTargetable(false);
+            rb.isKinematic = true;
         }
     }
 
@@ -97,6 +98,7 @@ public class AIController : MonoBehaviour
         InvokeRepeating("AcquireTarget", 0.0f, 1.0f / ACQUIRE_TARGETS_PER_SECOND);
         state = State.IDLE;
         character.SetTargetable(true);
+        rb.isKinematic = false;
         if (factory != null)
         {
             factory.RobotActivated();

@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 3102369540501914087}
   - component: {fileID: 3102369540501914086}
   - component: {fileID: 3102369540501914089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Factory
   m_TagString: Factory
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.059700966, y: 0.17578623}
+  m_Offset: {x: -0.030933619, y: 0.25211024}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -484,7 +484,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0530677, y: 2.0862348}
+  m_Size: {x: 3.5318444, y: 1.9335868}
   m_EdgeRadius: 0
 --- !u!114 &3102369540501914089
 MonoBehaviour:
