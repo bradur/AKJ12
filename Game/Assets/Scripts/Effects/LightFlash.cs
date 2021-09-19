@@ -9,6 +9,9 @@ public class LightFlash : MonoBehaviour
     private float origIntensity;
     private float flashTimer = -1;
 
+    private float defaultFlashTime = 0.1f;
+    private float flashTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +25,20 @@ public class LightFlash : MonoBehaviour
     {
         if (flashTimer > 0)
         {
-            var t = (flashTimer + 0.1f) - Time.time;
-            t = Mathf.Clamp(t * 10.0f, 0.0f, 1.0f);
+            var t = (flashTimer + flashTime) - Time.time;
+            t = Mathf.Clamp(t / flashTime, 0.0f, 1.0f);
             light.intensity = t * origIntensity;
         }
     }
 
     public void Flash()
     {
+        Flash(defaultFlashTime);
+    }
+
+    public void Flash(float flashDur)
+    {
+        flashTime = flashDur;
         flashTimer = Time.time;
     }
 }
