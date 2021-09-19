@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 20
   InitialDelay: 5
-  InitialEnemiesPerSecond: 0.1
-  EnemiesPerSecondRampUp: 0.005
+  InitialEnemiesPerSecond: 0.05
+  EnemiesPerSecondRampUp: 0.001
   EnemyPrefab: {fileID: 948648687750427689, guid: 7d05074179d628a49a527a1fd3de72df, type: 3}
 --- !u!114 &2441067176485925126
 MonoBehaviour:
@@ -64,8 +64,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 10
   InitialDelay: 30
-  InitialEnemiesPerSecond: 0.1
-  EnemiesPerSecondRampUp: 0.005
+  InitialEnemiesPerSecond: 0.05
+  EnemiesPerSecondRampUp: 0.001
   EnemyPrefab: {fileID: 2996875596588403890, guid: 6b600d49627e62547a96b7089a90c6c5, type: 3}
 --- !u!114 &4012317825832515037
 MonoBehaviour:
@@ -81,6 +81,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 20
   InitialDelay: 60
-  InitialEnemiesPerSecond: 0.1
-  EnemiesPerSecondRampUp: 0.005
+  InitialEnemiesPerSecond: 0.05
+  EnemiesPerSecondRampUp: 0.001
   EnemyPrefab: {fileID: 8779095000032349582, guid: b7f7dd3f725b4fe4082e50083b3270d8, type: 3}
