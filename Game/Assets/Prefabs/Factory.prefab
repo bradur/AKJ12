@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partsNeededCount: 3
-  robotPrefab: {fileID: 948648687750427689, guid: 7d05074179d628a49a527a1fd3de72df, type: 3}
+  robotPrefab: {fileID: 8431413964155170955, guid: 491dde66b439eea46be4e7f4df3f6837, type: 3}
   spawnPoint: {fileID: 3102369540597034909}
   minigameConfig: {fileID: 11400000, guid: d03f57361e15e134e99a366878baeda2, type: 2}
   positiveScaling: {fileID: 11400000, guid: 8a58e4574933c95468e45fb45c5e9207, type: 2}

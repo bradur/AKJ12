@@ -11,7 +11,6 @@ public class AIConfig : ScriptableObject
     public float AggroRange = 3;
     public float MoveSpeed = 5;
     public float TurnSpeed = 180;
-    public float FireRate = 2;
     public GunConfig GunConfig;
     public CharacterConfig CharacterConfig;
     public int Score = 100;

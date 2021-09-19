@@ -58,7 +58,7 @@ PrefabInstance:
     - target: {fileID: 3102369540501914089, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
       propertyPath: robotPrefab
       value: 
-      objectReference: {fileID: 2996875596588403890, guid: 6b600d49627e62547a96b7089a90c6c5, type: 3}
+      objectReference: {fileID: 3694594346363729961, guid: 1a81fbd2398ace643aa3c64f2be4c9b6, type: 3}
     - target: {fileID: 3102369540501914089, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
       propertyPath: partsNeededCount
       value: 5

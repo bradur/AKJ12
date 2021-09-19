@@ -21,10 +21,6 @@ public class Destroyed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F)) {
-            isDestroyed = true;
-        }
-
         if (isDestroyed && !dead) {
             GameObject robotPart = Instantiate(robotPartPrefab);
             // TODO: set parent container
