@@ -130,6 +130,7 @@ Transform:
   - {fileID: 3152414961221624916}
   - {fileID: 1149572057220675657}
   - {fileID: 5174385393137244070}
+  - {fileID: 4579861400818994557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,7 +194,54 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.083333336
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: acdfe3d1cf84d3040b107309e8899686, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 776e28d65ab356c43b69bbae01577dbe, type: 2}
+--- !u!1 &5507261180799416606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4579861400818994557}
+  - component: {fileID: 6701815341599704351}
+  m_Layer: 0
+  m_Name: Robotparts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4579861400818994557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507261180799416606}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 683129511274133395}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6701815341599704351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507261180799416606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca8712595c4a0a458a04e4933fa6c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partsConfig: {fileID: 11400000, guid: 926efab6aa5cc344480ba6821d3894e7, type: 2}
+  robotPartPrefab: {fileID: 2383940868221136918, guid: 4b032244193c98541a097272ac64a90c, type: 3}
+  partsToSpawn: 15
+  spawnRange: 15
 --- !u!1 &8593894334193175351
 GameObject:
   m_ObjectHideFlags: 0

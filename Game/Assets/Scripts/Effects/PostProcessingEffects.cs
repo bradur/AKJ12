@@ -67,7 +67,7 @@ public class PostProcessingEffects : MonoBehaviour
         options.ShakeMagnitude = 0.1f;
         options.DampingSpeed = 0.8f;
         options.Enabled = true;
-        ScreenShakeEffect.main.Shake(options);
+        //ScreenShakeEffect.main.Shake(options);
         playerDamagedImpulseSource.GenerateImpulse();
 
         bloodPuddle.transform.position = player.transform.position;
@@ -81,7 +81,7 @@ public class PostProcessingEffects : MonoBehaviour
         options.ShakeMagnitude = 0.05f;
         options.DampingSpeed = 0.8f;
         options.Enabled = true;
-        ScreenShakeEffect.main.Shake(options);
+        //ScreenShakeEffect.main.Shake(options);
         ScreenFlashEffect.main.Flash();
         enemyDamagedImpulseSource.GenerateImpulse();
 
