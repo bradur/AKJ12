@@ -85,9 +85,11 @@ public class MinigameSelectionIndicator : MonoBehaviour
             Mathf.Clamp(newY, 0f, parentSize.y)
         );
         if (newY > parentSize.y) {
+            SoundManager.main.PlaySound(GameSoundType.MinigamePing);
             currentDirection = IndicatorDirection.Down;
         } else if (newY <= 0) {
             currentDirection = IndicatorDirection.Up;
+            SoundManager.main.PlaySound(GameSoundType.MinigamePing);
         }
     }
 
@@ -120,6 +122,7 @@ public class MinigameSelectionIndicator : MonoBehaviour
             return;
         }
         if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStart)) {
+            SoundManager.main.PlaySound(GameSoundType.MinigamePing);
             minigame.Started();
             started = true;
         }

@@ -81,7 +81,9 @@ public enum GameSoundType
     FactoryBuild,
     MinigamePing,
     MinigameSuccess,
-    MinigameFail
+    MinigameFail,
+    Pickup,
+    Heal
 }
 
 [System.Serializable]

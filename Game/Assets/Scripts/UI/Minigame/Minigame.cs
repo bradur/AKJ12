@@ -174,6 +174,7 @@ public class Minigame : MonoBehaviour
     {
         if (PositiveCallback != null)
         {
+            SoundManager.main.PlaySound(GameSoundType.MinigameSuccess);
             PositiveCallback(value, resultPosition);
         }
         else
@@ -185,6 +186,7 @@ public class Minigame : MonoBehaviour
     {
         if (NegativeCallback != null)
         {
+            SoundManager.main.PlaySound(GameSoundType.MinigameFail);
             NegativeCallback(value, resultPosition);
         }
         else

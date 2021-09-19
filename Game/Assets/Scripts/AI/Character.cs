@@ -59,6 +59,7 @@ public class Character : MonoBehaviour
         health += addedHealth;
         health = Mathf.Clamp(health, 0, config.Health);
         if (gameObject.tag == "Player"){
+            SoundManager.main.PlaySound(GameSoundType.Heal);
             UIHealth.main.SetHealthAnimated((int)health);
         }
         return true;

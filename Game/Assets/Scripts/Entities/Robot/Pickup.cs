@@ -56,6 +56,7 @@ public class Pickup : MonoBehaviour
                     bool collected = picker.CollectPart(value);
                     if (collected)
                         {
+                            SoundManager.main.PlaySound(GameSoundType.Pickup);
                         PoppingTextOptions poppingTextOptions = new PoppingTextOptions();
                         poppingTextOptions.Position = transform.position;
                         poppingTextOptions.Text = $"+1 Robot part";
