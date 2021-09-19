@@ -100,7 +100,7 @@ public class MinigameSelectionIndicator : MonoBehaviour
         if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen) {
             return;
         }
-        if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStop)) {
+        if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStop) || Input.GetKeyDown(KeyCode.Joystick1Button0)) {
             MakeSelection();
         }
     }
@@ -121,7 +121,7 @@ public class MinigameSelectionIndicator : MonoBehaviour
         if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen) {
             return;
         }
-        if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStart)) {
+        if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStart) || Input.GetKeyDown(KeyCode.Joystick1Button0)) {
             SoundManager.main.PlaySound(GameSoundType.MinigamePing);
             minigame.Started();
             started = true;
