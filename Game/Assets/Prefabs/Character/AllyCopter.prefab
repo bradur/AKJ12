@@ -50,6 +50,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 392603063278055279, guid: 7d05074179d628a49a527a1fd3de72df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1bef0650e0ecf574898c9179b0c78c77, type: 2}
     - target: {fileID: 948648687750427689, guid: 7d05074179d628a49a527a1fd3de72df, type: 3}
       propertyPath: m_Name
       value: AllyCopter

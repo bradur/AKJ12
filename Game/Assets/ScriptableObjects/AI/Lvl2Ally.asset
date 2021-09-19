@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c664b0661d5454099cc2198d93a328, type: 3}
   m_Name: Lvl2Ally
   m_EditorClassIdentifier: 
-  IdleType: 1
+  IdleType: 0
   AttackType: 0
-  Faction: 1
+  Faction: 0
   AggroRange: 5
   MoveSpeed: 6
   TurnSpeed: 210
-  FireRate: 4
   GunConfig: {fileID: 11400000, guid: 27b3115e6762b8744b057d3b06eed3bb, type: 2}
   CharacterConfig: {fileID: 11400000, guid: 3eac9bda4485fc248b9bbc3d8d975045, type: 2}
   Score: 100

@@ -50,6 +50,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2436309862361749492, guid: 6b600d49627e62547a96b7089a90c6c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1bef0650e0ecf574898c9179b0c78c77, type: 2}
     - target: {fileID: 2996875596588403890, guid: 6b600d49627e62547a96b7089a90c6c5, type: 3}
       propertyPath: m_Name
       value: AllyTank
