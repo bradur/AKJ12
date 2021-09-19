@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         var enemy = Instantiate(EnemyPrefab, enemyParent);
         enemy.transform.position = position;
 
-        var timeUntilNext = 1 / (InitialEnemiesPerSecond + Time.time * EnemiesPerSecondRampUp);
+        var timeUntilNext = 1 / (InitialEnemiesPerSecond + (Time.time - InitialDelay) * EnemiesPerSecondRampUp);
         Invoke("Spawn", timeUntilNext);
     }
 }
