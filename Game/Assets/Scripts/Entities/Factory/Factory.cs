@@ -129,7 +129,7 @@ public class Factory : MonoBehaviour
             textOptions.Color = Color.red;
             ScalingStat stat1 = negativeScaling.getRandomStat();
             aiController.ScaleStat(stat1, negativeScaling.getStatScale(stat1));
-            textOptions.Text = $"Bad kickstart!\n-{stat1.ToString()}\n+{value} points";
+            textOptions.Text = $"Bad kickstart!\n-{stat1.ToString()}";
             UIScore.main.AddValueAnimated(value);
             textOptions.Position = pos;
             aiController.Activate();
