@@ -18,7 +18,12 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField]
     private GameObject container;
     [SerializeField]
+    private GameObject hud;
+    [SerializeField]
     private Text txtScore;
+
+    [SerializeField]
+    private Text txtTimer;
 
     public bool IsOpen { get; private set; }
 
@@ -26,6 +31,7 @@ public class GameOverMenu : MonoBehaviour
 
     void Start() {
         inputConfig = Configs.main.InputConfig;
+        container.SetActive(false);
     }
 
 
@@ -37,6 +43,8 @@ public class GameOverMenu : MonoBehaviour
         Crosshair.main.Unlock();
         Time.timeScale = 0f;
         txtScore.text = $"Score: {UIScore.main.Score.ToString()}";
+        txtTimer.text = $"Time: {UITimer.main.GetFormattedTime()}";
+        hud.SetActive(false);
         container.SetActive(true);
     }
 
