@@ -43,16 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f679f9f7ae0f924292781f9940fac13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultOptions:
-    DebugColor: {r: 1, g: 0, b: 0, a: 0.28235295}
-    Radius: 1.6
-    Target: {fileID: 0}
-    MinigameOptions:
-      IndicatorOptions:
-        Speed: 10
-        StartPercentage: 30
-        Direction: 2
-      Areas: []
 --- !u!1001 &5127156151727527857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,10 +50,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3793346891239853530, guid: b7f7dd3f725b4fe4082e50083b3270d8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793346891239853530, guid: b7f7dd3f725b4fe4082e50083b3270d8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793346891239853530, guid: b7f7dd3f725b4fe4082e50083b3270d8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.822165
+      objectReference: {fileID: 0}
     - target: {fileID: 8779095000032349576, guid: b7f7dd3f725b4fe4082e50083b3270d8, type: 3}
       propertyPath: config
       value: 
-      objectReference: {fileID: 11400000, guid: b5b303a587cd278489ddb1be7d594a0b, type: 2}
+      objectReference: {fileID: 11400000, guid: a92714e90e46eba4da80fcbf3875dbf0, type: 2}
     - target: {fileID: 8779095000032349576, guid: b7f7dd3f725b4fe4082e50083b3270d8, type: 3}
       propertyPath: requiresJumpStart
       value: 1
