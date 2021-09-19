@@ -16,6 +16,7 @@ public class Factory : MonoBehaviour
     private UnloadParts unloadTrigger;
     private FactoryLightArray lightArray;
     private bool assemblyOngoing = false;
+    private bool previousRobotInactive = false;
     private float assemblyStartedTime = 0;
     private float assemblyDuration = 5f;
 
@@ -56,6 +57,7 @@ public class Factory : MonoBehaviour
         if (assemblyOngoing && Time.time - assemblyStartedTime > assemblyDuration)
         {
             assemblyOngoing = false;
+            previousRobotInactive = true;
             lightArray.SetActive(Mathf.FloorToInt(partsValue));
             unloadTrigger.gameObject.SetActive(true);
 
@@ -63,21 +65,35 @@ public class Factory : MonoBehaviour
             GameObject allyRobot = Instantiate(robotPrefab);
             allyRobot.transform.position = spawnPoint.position;
             allyRobot.transform.parent = ContainerManager.main.GetRobotContainer().transform;
+            AIController aiController = allyRobot.GetComponentInChildren<AIController>();
+            aiController.SetFactory(this);
             SetupMinigame(allyRobot);
+            ShowFactoryInfo();
         }
     }
 
+    private MinigameInfo minigameInfo;
+    private void ShowFactoryInfo()
+    {
+        Transform target = transform.Find("SpawnPointInfo").transform;
+        minigameInfo = WorldUI.main.GetMinigameInfo("Jumpstart the robot!", target.position, target);
+
+        if (!minigameInfo.IsShown)
+        {
+            minigameInfo.Show();
+        }
+    }
     private UnityEngine.Events.UnityAction<int, Vector2> PositiveMinigameAction(AIController aiController)
     {
         return delegate (int value, Vector2 pos)
         {
             PoppingTextOptions textOptions = new PoppingTextOptions();
-            textOptions.Color = value == 100 ? Color.green : Color.yellow;
             string text = "";
 
             if (value == 100)
             {
                 text += "Awesome!";
+                textOptions.Color = Color.green;
                 ScalingStat stat1 = positiveScaling.getRandomStat();
                 aiController.ScaleStat(stat1, positiveScaling.getStatScale(stat1));
                 ScalingStat stat2 = positiveScaling.getRandomStat();
@@ -88,12 +104,14 @@ public class Factory : MonoBehaviour
             else if (value == 80)
             {
                 text += "Great!";
+                textOptions.Color = new Color(0.2f, 1, 0.1f, 1);
                 ScalingStat stat1 = positiveScaling.getRandomStat();
                 aiController.ScaleStat(stat1, positiveScaling.getStatScale(stat1));
                 text += $"\n+{stat1.ToString()}";
             }
             else
             {
+                textOptions.Color =  Color.yellow;
                 text += "OK!";
             }
             textOptions.Text = text;
@@ -137,6 +155,12 @@ public class Factory : MonoBehaviour
 
     public void AddParts(float value)
     {
+        // can't use factory until robot is kickstarted
+        if (previousRobotInactive)
+        {
+            Debug.Log("Can't use");
+            return;
+        }
         partsValue += value;
         lightArray.SetActive(Mathf.FloorToInt(partsValue));
 
@@ -147,6 +171,15 @@ public class Factory : MonoBehaviour
             unloadTrigger.gameObject.SetActive(false);
             assemblyStartedTime = Time.time;
             assemblyOngoing = true;
+        }
+    }
+
+    public void RobotActivated()
+    {
+        previousRobotInactive = false;
+        if (minigameInfo != null)
+        {
+            minigameInfo.Hide();
         }
     }
 }
