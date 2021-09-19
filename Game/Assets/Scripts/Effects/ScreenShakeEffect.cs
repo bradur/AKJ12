@@ -22,8 +22,24 @@ public class ScreenShakeEffect : MonoBehaviour
     [SerializeField]
     private ScreenShakeOptions defaultOptions;
 
+    private bool allowShaking = true;
+
     void Awake() {
         main = this;
+    }
+
+    void Start() {
+        Refresh();
+    }
+
+    public void Refresh() {
+        int shakeOn = PlayerPrefs.GetInt("screenShake", 1);
+        if (shakeOn == 0) {
+            allowShaking = false;
+        } else {
+            allowShaking = true;
+        }
+        Debug.Log($"Shaking is: {allowShaking}");
     }
 
     public void Shake(ScreenShakeOptions newOptions)
@@ -48,7 +64,7 @@ public class ScreenShakeEffect : MonoBehaviour
 
     void Update()
     {
-        if (!shake)
+        if (!shake || !allowShaking)
         {
             return;
         }
