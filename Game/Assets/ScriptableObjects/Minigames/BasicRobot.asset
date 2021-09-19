@@ -21,10 +21,6 @@ MonoBehaviour:
         StartPercentage: 20
         Direction: 2
       Areas:
-      - PercentageSize: 1
-        Color: {r: 0.5, g: 0, b: 0, a: 1}
-        ResultValue: 100
-        Result: 2
       - PercentageSize: 19
         Color: {r: 0.10106132, g: 0.5, b: 0.03066039, a: 1}
         ResultValue: 100
