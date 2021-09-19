@@ -11,6 +11,7 @@ public class Destroyed : MonoBehaviour
 
     private bool isDestroyed = false;
     private bool dead = false;
+    private static int killedBots = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,16 @@ public class Destroyed : MonoBehaviour
         if (isDestroyed && !dead)
         {
             // TODO: set parent container
+            killedBots++;
+            if (killedBots == 9)
+            {
+                GameObject robotPart = Instantiate(robotPartPrefab);
+                robotPart.transform.parent = ContainerManager.main.GetRobotPartContainer().transform;
+                robotPart.transform.position = transform.position;
+                RobotPartConfig conf = partsConfig.getHealthPack();
+                robotPart.GetComponent<RobotPart>().Initialize(conf);
+                killedBots = 0;
+            }
             float drop = Random.Range(0f, 1f);
             if (drop < partsConfig.chanceToDrop)
             {

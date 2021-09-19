@@ -20,13 +20,17 @@ public class RobotPartsConfig : ScriptableObject
     public RobotPartConfig getRandomPart() {
         float sum = 0f;
         List<WeightPair> set = new List<WeightPair>(partConfigs.Count);
-        foreach (RobotPartConfig conf in partConfigs) {
+        foreach (RobotPartConfig conf in partConfigs.Where(x => x.RobotPartType != RobotPartType.HealthPack)) {
             sum += conf.probability;
             WeightPair p = new WeightPair(sum, conf);
             set.Add(p);
         }
         double randomVal = random.NextDouble() * sum;
         return set.Where(x => x.weight >= randomVal).FirstOrDefault().config;
+    }
+
+    public RobotPartConfig getHealthPack() {
+        return partConfigs.Where(x => x.RobotPartType == RobotPartType.HealthPack).FirstOrDefault();
     }
 
     private class WeightPair {
