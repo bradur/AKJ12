@@ -9,6 +9,8 @@ public class RobotPartsConfig : ScriptableObject
 {
     [SerializeField]
     List<RobotPartConfig> partConfigs;
+    [SerializeField]
+    public float chanceToDrop;
     private System.Random random;
 
     public RobotPartsConfig() {

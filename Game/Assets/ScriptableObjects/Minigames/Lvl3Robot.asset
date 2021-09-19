@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 897960ec7d1d12c46b507a3dea729bf6, type: 3}
-  m_Name: BasicRobot
+  m_Name: Lvl3Robot
   m_EditorClassIdentifier: 
   Options:
     DebugColor: {r: 0.990566, g: 0, b: 0, a: 0.29803923}
@@ -21,23 +21,23 @@ MonoBehaviour:
         StartPercentage: 20
         Direction: 2
       Areas:
-      - PercentageSize: 1
+      - PercentageSize: 20
         Color: {r: 0.5, g: 0, b: 0, a: 1}
         ResultValue: 100
         Result: 2
-      - PercentageSize: 19
+      - PercentageSize: 10
         Color: {r: 0.10106132, g: 0.5, b: 0.03066039, a: 1}
         ResultValue: 100
         Result: 1
-      - PercentageSize: 25
+      - PercentageSize: 18
         Color: {r: 0.37668166, g: 0.5019608, b: 0, a: 1}
         ResultValue: 80
         Result: 1
-      - PercentageSize: 30
+      - PercentageSize: 22
         Color: {r: 0.5, g: 0.49215686, b: 0, a: 1}
         ResultValue: 50
         Result: 1
-      - PercentageSize: 25
+      - PercentageSize: 30
         Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
         ResultValue: 1
         Result: 3

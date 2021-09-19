@@ -21,19 +21,25 @@ public class Destroyed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDestroyed && !dead) {
-            GameObject robotPart = Instantiate(robotPartPrefab);
+        if (isDestroyed && !dead)
+        {
             // TODO: set parent container
-            robotPart.transform.parent = ContainerManager.main.GetRobotPartContainer().transform;
-            robotPart.transform.position = transform.position;
-            RobotPartConfig conf = partsConfig.getRandomPart();
-            robotPart.GetComponent<RobotPart>().Initialize(conf);
+            float drop = Random.Range(0f, 1f);
+            if (drop < partsConfig.chanceToDrop)
+            {
+                GameObject robotPart = Instantiate(robotPartPrefab);
+                robotPart.transform.parent = ContainerManager.main.GetRobotPartContainer().transform;
+                robotPart.transform.position = transform.position;
+                RobotPartConfig conf = partsConfig.getRandomPart();
+                robotPart.GetComponent<RobotPart>().Initialize(conf);
+            }
             Destroy(gameObject);
             dead = true;
         }
     }
 
-    public void SetDestroyed(bool isDestroyed = true) {
+    public void SetDestroyed(bool isDestroyed = true)
+    {
         this.isDestroyed = isDestroyed;
     }
 }

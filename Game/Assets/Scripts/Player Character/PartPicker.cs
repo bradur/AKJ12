@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PartPicker : MonoBehaviour
 {
-    private int maxParts = 99999;
+    private int maxParts = 999;
     private int partsCollected = 0;
     private float totalValue = 0;
 

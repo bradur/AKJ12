@@ -471,6 +471,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4535913421123328575, guid: c082c3e887dde3c42b42f8716b444840, type: 3}
     - target: {fileID: 3102369540501914089, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: minigameConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 501ff3ad744d42a4ea366197b6c0619e, type: 2}
+    - target: {fileID: 3102369540501914089, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
       propertyPath: partsNeededCount
       value: 10
       objectReference: {fileID: 0}
