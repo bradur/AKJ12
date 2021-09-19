@@ -78,7 +78,7 @@ public class Gun : MonoBehaviour
                         effectPlayed = true;
                     } else {
                         SoundManager.main.PlaySound(GameSoundType.RobotHit);
-                        PostProcessingEffects.Main.EnemyDamaged();
+                        PostProcessingEffects.Main.EnemyDamaged(hit.point);
                     }
                 }
 
