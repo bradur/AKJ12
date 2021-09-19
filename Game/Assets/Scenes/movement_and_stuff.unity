@@ -2870,6 +2870,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 683129511130730632, guid: 093cc1e445528ef4c8480bcff71db637, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 683129511130730632, guid: 093cc1e445528ef4c8480bcff71db637, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 683129511130730633, guid: 093cc1e445528ef4c8480bcff71db637, type: 3}
+      propertyPath: m_Size.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 683129511130730633, guid: 093cc1e445528ef4c8480bcff71db637, type: 3}
+      propertyPath: m_Size.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 683129511130730633, guid: 093cc1e445528ef4c8480bcff71db637, type: 3}
+      propertyPath: m_DrawMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 683129511274133394, guid: 093cc1e445528ef4c8480bcff71db637, type: 3}
       propertyPath: m_Name
       value: Level
