@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Character))]
 public class AIController : MonoBehaviour
@@ -48,6 +49,8 @@ public class AIController : MonoBehaviour
             return transform.position;
         }
     }
+
+    private Vector2 moveTarget;
 
     void Awake()
     {
@@ -103,6 +106,7 @@ public class AIController : MonoBehaviour
         {
             factory.RobotActivated();
         }
+        Invoke("UpdatePathing", pathingInterval);
     }
 
     // Update is called once per frame
@@ -110,6 +114,7 @@ public class AIController : MonoBehaviour
     {
         handleState();
         handleRoutines();
+        handlePathing();
         if (isAlive())
         {
             handleRotation();
@@ -226,9 +231,9 @@ public class AIController : MonoBehaviour
             return;
         }
 
-        if (Vector2.Distance(myPosition, TargetLocation) > TARGET_LOCATION_MARGIN)
+        if (Vector2.Distance(myPosition, moveTarget) > TARGET_LOCATION_MARGIN)
         {
-            rb.velocity = (TargetLocation - myPosition).normalized * movementSpeed;
+            rb.velocity = (moveTarget - myPosition).normalized * movementSpeed;
         }
         else
         {
@@ -294,6 +299,69 @@ public class AIController : MonoBehaviour
     private bool isAlive()
     {
         return state != State.DEAD;
+    }
+
+
+    // *************************
+    // PATHFINDING
+    // *************************
+    private NavMeshPath path;
+    private int cornerIndex;
+
+    private float pathingInterval = 0.2f;
+    private float desiredRange = 0.1f;
+    
+    private void handlePathing()
+    {
+        if (HasPath())
+        {
+            if (IsLastCorner() && distanceToNextCorner() < desiredRange)
+            {
+                moveTarget = transform.position;
+            }
+            else
+            {
+                moveTarget = getNextCorner();
+            }
+        }
+    }
+
+    private Vector2 getNextCorner()
+    {
+        while (!IsLastCorner() && distanceToNextCorner() < 0.1f)
+        {
+            cornerIndex++;
+        }
+        return path.corners[cornerIndex];
+    }
+
+    private float distanceToNextCorner()
+    {
+        return Vector2.Distance(path.corners[cornerIndex], transform.position);
+    }
+
+    private bool IsLastCorner()
+    {
+        return cornerIndex >= path.corners.Length - 1;
+    }
+
+    private void UpdatePathing()
+    {
+        path = GetPathTo(TargetLocation);
+        cornerIndex = 0;
+        Invoke("UpdatePathing", pathingInterval);
+    }
+
+    private bool HasPath()
+    {
+        return path.corners.Length > 0;
+    }
+
+    private NavMeshPath GetPathTo(Vector2 target)
+    {
+        NavMeshPath newPath = new NavMeshPath();
+        NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, newPath);
+        return newPath;
     }
 
     private enum State
