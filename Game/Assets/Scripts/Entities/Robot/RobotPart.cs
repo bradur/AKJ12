@@ -7,6 +7,8 @@ public class RobotPart : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer sprite;
+    [SerializeField]
+    private SpriteRenderer effectSprite;
     private Rigidbody2D body;
     private float value;
     private Pickup pickupTrigger;
@@ -14,6 +16,7 @@ public class RobotPart : MonoBehaviour
     public void Initialize(RobotPartConfig conf)
     {
         sprite.sprite = conf.sprite;
+        effectSprite.sprite = conf.sprite;
         value = conf.value;
 
         pickupTrigger = GetComponentsInChildren<Pickup>()[0];
