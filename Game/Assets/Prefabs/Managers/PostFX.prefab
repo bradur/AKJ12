@@ -9881,8 +9881,8 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 7c6a2ad335a03e14482238e2f1fc8697, type: 2}
-    m_AmplitudeGain: 0.7
-    m_FrequencyGain: 1
+    m_AmplitudeGain: 0.3
+    m_FrequencyGain: 0.6
     m_RepeatMode: 0
     m_Randomize: 1
     m_TimeEnvelope:
@@ -9954,8 +9954,8 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 1194c6f2308153d40a5c093f705fedd9, type: 2}
-    m_AmplitudeGain: 0.7
-    m_FrequencyGain: 1
+    m_AmplitudeGain: 0.3
+    m_FrequencyGain: 0.6
     m_RepeatMode: 0
     m_Randomize: 1
     m_TimeEnvelope:
