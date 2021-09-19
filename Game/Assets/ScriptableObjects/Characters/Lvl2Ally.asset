@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f974b326b80cacd46b76b44091f2edd7, type: 3}
-  m_Name: Lvl3Robot
+  m_Name: Lvl2Ally
   m_EditorClassIdentifier: 
-  Health: 50
+  Health: 25

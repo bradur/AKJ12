@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef7d5f98d417ed49b3f048a2ebcf484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredScore: 64000000c8000000
+  requiredScore: 88130000a8610000a086010040420f0000e1f505
   unavailableColor: {r: 0.7372549, g: 0, b: 0.03529412, a: 1}
   availableColor: {r: 0, g: 0.6698113, b: 0, a: 1}
   rend: {fileID: 9030141863470952796}

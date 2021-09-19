@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Lvl3Enemy
   m_EditorClassIdentifier: 
   IdleType: 1
-  AttackType: 0
+  AttackType: 1
   Faction: 1
   AggroRange: 5
   MoveSpeed: 4.5
   TurnSpeed: 200
   GunConfig: {fileID: 11400000, guid: 40f80c743d21375479046b2950b45a69, type: 2}
-  CharacterConfig: {fileID: 11400000, guid: 3eac9bda4485fc248b9bbc3d8d975045, type: 2}
+  CharacterConfig: {fileID: 11400000, guid: b882bafc12af53b42a739125959b8e2f, type: 2}
   Score: 100
