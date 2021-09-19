@@ -39,6 +39,8 @@ public class Character : MonoBehaviour
 
     public void Hurt(float damage)
     {
+        if(!targetable) return;
+        
         health -= damage;
         if (health <= 0)
         {
