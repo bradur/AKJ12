@@ -15,7 +15,6 @@ public class PostProcessingEffects : MonoBehaviour
     private CinemachineImpulseSource playerDamagedImpulseSource;
     [SerializeField]
     private CinemachineImpulseSource enemyDamagedImpulseSource;
-
     
 
     public static PostProcessingEffects Main;
@@ -23,6 +22,7 @@ public class PostProcessingEffects : MonoBehaviour
     private VolumeProfile profile;
     private ChromaticAberration chrAberration;
     private Vignette vignette;
+    private MotionBlur motionBlur;
 
     private float playerDamagedTimer = -1;
 
@@ -53,6 +53,7 @@ public class PostProcessingEffects : MonoBehaviour
             chrAberration.intensity.Override(t * 2);
 
             vignette.intensity.Override(t / 2.0f);
+            motionBlur.intensity.Override(t);
         }
     }
 
