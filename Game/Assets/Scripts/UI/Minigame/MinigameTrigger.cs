@@ -35,7 +35,8 @@ public class MinigameTrigger : MonoBehaviour
         {
             if (minigame.Trigger == null || (minigame.Trigger.DistanceFromTrigger() >= DistanceFromTrigger())) {
                 minigame.Initialize(this, options.MinigameOptions, options.PositiveAction, options.NegativeAction, options.RestartAction);
-                minigame.SetPosition(transform.position);
+                Vector2 pos = new Vector2(transform.position.x, transform.position.y + 1f);
+                minigame.SetPosition(pos);
             }
         }
         if (minigame.Trigger == this) {
