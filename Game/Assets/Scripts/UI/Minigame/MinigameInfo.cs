@@ -9,21 +9,45 @@ public class MinigameInfo : MonoBehaviour
     private Text txtInfo;
     private Animator animator;
 
-    public void SetText(string newText) {
+    private Transform target;
+
+    public bool IsShown { get; private set; } = false;
+
+    public void SetText(string newText)
+    {
         txtInfo.text = newText;
     }
 
-    public void Hide() {
-        if (animator == null) {
-            animator = GetComponent<Animator>();
-        }
-        animator.Play("hideMinigameInfo");
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 
-    public void Show() {
-        if (animator == null) {
-            animator = GetComponent<Animator>();
+    public void Hide()
+    {
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+        animator.Play("hideMinigameInfo");
+        IsShown = false;
+    }
+
+    public void Show()
+    {
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
         }
         animator.Play("showMinigameInfo");
+        IsShown = true;
+    }
+
+    void Update()
+    {
+        if (target != null)
+        {
+            transform.position = target.position;
+        }
     }
 }

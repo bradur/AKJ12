@@ -15,6 +15,9 @@ public class WorldUI : MonoBehaviour
 
     [SerializeField]
     private Transform minigameContainer;
+
+    [SerializeField]
+    private Transform infoContainer;
     public void ShowPoppingText(PoppingTextOptions options)
     {
         PoppingText poppingText = Prefabs.Get<PoppingText>();
@@ -30,5 +33,14 @@ public class WorldUI : MonoBehaviour
             minigame.transform.SetParent(minigameContainer, false);
         }
         return minigame;
+    }
+
+    public MinigameInfo GetMinigameInfo(string text, Vector2 position, Transform target = null) {
+        MinigameInfo info = Prefabs.Get<MinigameInfo>();
+        info.SetText(text);
+        info.SetTarget(target);
+        info.transform.SetParent(infoContainer, false);
+        info.transform.position = position;
+        return info;
     }
 }
