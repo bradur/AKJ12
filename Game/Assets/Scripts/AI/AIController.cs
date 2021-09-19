@@ -13,6 +13,11 @@ public class AIController : MonoBehaviour
     [SerializeField]
     private bool requiresJumpStart;
 
+    [SerializeField]
+    private ParticleSystem dieExplosion;
+    [SerializeField]
+    private LightFlash dieFlash;
+
     private Character character;
     private Character target;
 
@@ -171,6 +176,13 @@ public class AIController : MonoBehaviour
     {
         if (character.Dead)
         {
+            if (state != State.DEAD)
+            {
+                dieExplosion.transform.parent = null;
+                dieExplosion.Play();
+                dieFlash.Flash(0.5f);
+                PostProcessingEffects.Main.EnemyDied(transform.position);
+            }
             SoundManager.main.PlaySound(GameSoundType.RobotDie);
             UIScore.main.AddValueAnimated(config.Score);
             state = State.DEAD;
