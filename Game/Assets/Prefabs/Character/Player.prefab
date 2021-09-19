@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f34410bfa8a79c4290d5138a2e99e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2097829009476089941}
 --- !u!1 &2097829009476089940
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +737,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9047619, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

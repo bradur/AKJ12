@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (isOpen)
         {
-            if (inputConfig.GetKeyDown(GameAction.MenuContinue))
+            if (inputConfig.GetKeyDown(GameAction.MenuContinue) || Input.GetKeyDown(KeyCode.Joystick1Button7))
             {
                 Continue();
             }
@@ -77,7 +77,8 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
-            if (!GameOverMenu.main.IsOpen && inputConfig.GetKeyDown(GameAction.OpenPauseMenu) && !isOpen)
+            bool openMenuKeyDown = Input.GetKeyDown(KeyCode.Joystick1Button7) || inputConfig.GetKeyDown(GameAction.OpenPauseMenu);
+            if (!GameOverMenu.main.IsOpen && openMenuKeyDown && !isOpen)
             {
                 Debug.Log("Opening menu!");
                 Open();
