@@ -22,6 +22,10 @@ public class Character : MonoBehaviour
     {
         this.config = config;
         health = config.Health;
+        if (gameObject.tag == "Player") {
+            Debug.Log($"Setting hp for player: {health}");
+            UIHealth.main.SetHealth((int)health);
+        }
         Faction = faction;
         CharacterManager.Main.register(this);
     }
@@ -42,6 +46,9 @@ public class Character : MonoBehaviour
         if(!targetable) return;
         
         health -= damage;
+        if (gameObject.tag == "Player"){
+            UIHealth.main.SetHealthAnimated((int)health);
+        }
         if (health <= 0)
         {
             Kill();
