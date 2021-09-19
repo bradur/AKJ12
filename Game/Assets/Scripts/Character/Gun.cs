@@ -43,8 +43,13 @@ public class Gun : MonoBehaviour
         targetLayerMask = LayerMask.GetMask(targetLayers) | defaultMask;
         minDamage = config.MinDamage;
         maxDamage = config.MaxDamage;
+        SetBulletsPerShot(bulletsPerShot);
+    }
 
-        for (var i = 0; i < bulletsPerShot; i++)
+    public void SetBulletsPerShot(int shots)
+    {
+        bulletsPerShot = shots;
+        while (hitEffects.Count < bulletsPerShot)
         {
             var effect = Instantiate(HitEffect, transform);
             hitEffects.Add(effect);
