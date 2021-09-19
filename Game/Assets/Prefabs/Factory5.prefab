@@ -63,6 +63,18 @@ PrefabInstance:
       propertyPath: partsNeededCount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4710513028216191063, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073115118601592485, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384227354905725942, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
 --- !u!4 &8551898165793946878 stripped
@@ -77,6 +89,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8551898165793946878}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (3)
@@ -134,6 +150,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8551898165793946878}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (4)

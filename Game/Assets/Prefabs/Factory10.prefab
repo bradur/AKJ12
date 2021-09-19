@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (7)
@@ -60,6 +64,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (6)
@@ -113,6 +121,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (5)
@@ -166,6 +178,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (9)
@@ -219,6 +235,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (4)
@@ -272,6 +292,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (8)
@@ -325,6 +349,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2212108591231172939}
     m_Modifications:
+    - target: {fileID: 2160592158577251369, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2721848015539238855, guid: cec5dfa9ef7dd9248bcf94c44ccb53f7, type: 3}
       propertyPath: m_Name
       value: FactoryLight (3)
@@ -444,6 +472,18 @@ PrefabInstance:
       objectReference: {fileID: 4535913421123328575, guid: c082c3e887dde3c42b42f8716b444840, type: 3}
     - target: {fileID: 3102369540501914089, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
       propertyPath: partsNeededCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710513028216191063, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073115118601592485, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384227354905725942, guid: 30c510839ad7c8045bbb96dbd5ee67b2, type: 3}
+      propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

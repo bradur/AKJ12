@@ -51,7 +51,7 @@ public class PartPicker : MonoBehaviour
                 factoryInfos.Add(info);
             };
         }
-        Debug.Log($"Show infos: {factoryInfos.Count}");
+        // Debug.Log($"Show infos: {factoryInfos.Count}");
         foreach (MinigameInfo info in factoryInfos)
         {
             if (!info.IsShown)
