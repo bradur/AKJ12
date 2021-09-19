@@ -37,9 +37,16 @@ public class RobotPartsConfig : ScriptableObject
     }
 }
 
+public enum RobotPartType {
+    None,
+    RobotPart,
+    HealthPack
+}
+
 [Serializable]
 public class RobotPartConfig {
     public float value = 1f;
     public Sprite sprite;
     public float probability;
+    public RobotPartType RobotPartType = RobotPartType.RobotPart;
 }

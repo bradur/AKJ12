@@ -22,7 +22,7 @@ public class RobotPart : MonoBehaviour
         pickupTrigger = GetComponentsInChildren<Pickup>()[0];
         if (pickupTrigger != null)
         {
-            pickupTrigger.Initialize(value, Kill);
+            pickupTrigger.Initialize(value, Kill, conf.RobotPartType);
         }
         else {
             Debug.LogError("No Pickup script in RobotPart prefab children found!");

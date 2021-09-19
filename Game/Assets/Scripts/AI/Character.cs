@@ -44,15 +44,24 @@ public class Character : MonoBehaviour
     public void Hurt(float damage)
     {
         if(!targetable) return;
-        
-        health -= damage;
-        if (gameObject.tag == "Player"){
-            UIHealth.main.SetHealthAnimated((int)health);
-        }
+
+        AddHealth(-(int)damage);
         if (health <= 0)
         {
             Kill();
         }
+    }
+
+    public bool AddHealth(int addedHealth) {
+        if (addedHealth > 0 && health >= config.Health) {
+            return false;
+        }
+        health += addedHealth;
+        health = Mathf.Clamp(health, 0, config.Health);
+        if (gameObject.tag == "Player"){
+            UIHealth.main.SetHealthAnimated((int)health);
+        }
+        return true;
     }
 
     void Kill()
