@@ -16,9 +16,16 @@ MonoBehaviour:
   - value: 1
     sprite: {fileID: -6849827953214718171, guid: 688b4d05fc7965d42acf7c836d018cb8, type: 3}
     probability: 0.33
+    RobotPartType: 1
   - value: 1
     sprite: {fileID: -1670964306019854577, guid: 688b4d05fc7965d42acf7c836d018cb8, type: 3}
     probability: 0.33
+    RobotPartType: 1
   - value: 1
     sprite: {fileID: -741406800466988644, guid: 688b4d05fc7965d42acf7c836d018cb8, type: 3}
     probability: 0.33
+    RobotPartType: 1
+  - value: 10
+    sprite: {fileID: 21300000, guid: f848559f3b76e3a42b388e1c6b0dbf1a, type: 3}
+    probability: 0.33
+    RobotPartType: 2
