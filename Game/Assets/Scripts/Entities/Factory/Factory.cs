@@ -59,7 +59,6 @@ public class Factory : MonoBehaviour
             assemblyOngoing = false;
             previousRobotInactive = true;
             lightArray.SetActive(Mathf.FloorToInt(partsValue));
-            unloadTrigger.gameObject.SetActive(true);
 
             SoundManager.main.PlaySound(GameSoundType.FactoryBuild);
             GameObject allyRobot = Instantiate(robotPrefab);
@@ -111,7 +110,7 @@ public class Factory : MonoBehaviour
             }
             else
             {
-                textOptions.Color =  Color.yellow;
+                textOptions.Color = Color.yellow;
                 text += "OK!";
             }
             text += $"\n+{value} points";
@@ -185,5 +184,6 @@ public class Factory : MonoBehaviour
         {
             minigameInfo.Hide();
         }
+        unloadTrigger.gameObject.SetActive(true);
     }
 }
