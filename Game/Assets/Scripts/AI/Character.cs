@@ -68,6 +68,9 @@ public class Character : MonoBehaviour
     {
         Dead = true;
         CharacterManager.Main.unregister(this);
+        if (gameObject.tag == "Player"){
+            GameOverMenu.main.Open();
+        }
     }
 
     public void ScaleHealth(float scale)

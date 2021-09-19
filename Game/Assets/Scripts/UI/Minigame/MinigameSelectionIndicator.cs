@@ -95,6 +95,9 @@ public class MinigameSelectionIndicator : MonoBehaviour
     private void HandleWhenStarted()
     {
         HandleMoving();
+        if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen) {
+            return;
+        }
         if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStop)) {
             MakeSelection();
         }
@@ -113,6 +116,9 @@ public class MinigameSelectionIndicator : MonoBehaviour
     }
 
     private void HandleWhenStopped() {
+        if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen) {
+            return;
+        }
         if (inputConfig.GetKeyDown(GameAction.MiniGameIndicatorStart)) {
             minigame.Started();
             started = true;

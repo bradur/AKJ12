@@ -17,3 +17,11 @@ MonoBehaviour:
     Key: 32
   - Action: 2
     Key: 32
+  - Action: 3
+    Key: 113
+  - Action: 4
+    Key: 109
+  - Action: 5
+    Key: 113
+  - Action: 6
+    Key: 114
