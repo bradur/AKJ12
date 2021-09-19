@@ -165,6 +165,7 @@ public class AIController : MonoBehaviour
         if (character.Dead)
         {
             SoundManager.main.PlaySound(GameSoundType.RobotDie);
+            UIScore.main.AddValueAnimated(config.Score);
             state = State.DEAD;
             return;
         }
