@@ -20,6 +20,10 @@ public class UITimer : MonoBehaviour
         timer = new Timer();
     }
 
+    public string GetFormattedTime() {
+        return timer.GetString();
+    }
+
     public void Pause() {
         timer.Pause();
     }
