@@ -114,6 +114,8 @@ public class Factory : MonoBehaviour
                 textOptions.Color =  Color.yellow;
                 text += "OK!";
             }
+            text += $"\n+{value} points";
+            UIScore.main.AddValueAnimated(value);
             textOptions.Text = text;
             textOptions.Position = pos;
             WorldUI.main.ShowPoppingText(textOptions);
@@ -129,9 +131,11 @@ public class Factory : MonoBehaviour
             textOptions.Color = Color.red;
             ScalingStat stat1 = negativeScaling.getRandomStat();
             aiController.ScaleStat(stat1, negativeScaling.getStatScale(stat1));
-            textOptions.Text = $"Bad kickstart!\n-{stat1.ToString()}";
+            textOptions.Text = $"Bad kickstart!\n-{stat1.ToString()}\n+{value} points";
+            UIScore.main.AddValueAnimated(value);
             textOptions.Position = pos;
             aiController.Activate();
+
             WorldUI.main.ShowPoppingText(textOptions);
         };
     }

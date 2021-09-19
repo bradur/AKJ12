@@ -14,4 +14,5 @@ public class AIConfig : ScriptableObject
     public float FireRate = 2;
     public GunConfig GunConfig;
     public CharacterConfig CharacterConfig;
+    public int Score = 100;
 }
