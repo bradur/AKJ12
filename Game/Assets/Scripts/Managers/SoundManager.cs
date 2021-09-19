@@ -32,6 +32,20 @@ public class SoundManager : MonoBehaviour
         if (music != null && !music.isPlaying) {
             music.Play();
         }
+        Refresh();
+    }
+
+    public void Refresh() {
+        int musicOn = PlayerPrefs.GetInt("music", 1);
+        if (musicOn == 1) {
+            if (!music.isPlaying) {
+                music.Play();
+            }
+        } else {
+            if (music.isPlaying) {
+                music.Pause();
+            }
+        }
     }
 
     public void PlaySound(GameSoundType soundType)
