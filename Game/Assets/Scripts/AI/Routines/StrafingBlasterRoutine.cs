@@ -29,17 +29,24 @@ public class StrafingBlasterRoutine : AttackRoutine
     {
         if (target != null)
         {
-            Vector2 targetDir = target.transform.position - transform.position;
-            controller.TargetDirection = targetDir;
-
-            if (Vector2.Angle(transform.up, targetDir) < 5.0f)
+            if (Vector2.Distance(transform.position, target.transform.position) > 8.0f)
             {
-                controller.Shoot();
+                controller.TargetLocation = target.transform.position;
             }
+            else
+            {
+                Vector2 targetDir = target.transform.position - transform.position;
+                controller.TargetDirection = targetDir;
 
-            var strafeRotation = Quaternion.AngleAxis(strafeAngle, Vector3.forward);
-            var moveDir = strafeRotation * targetDir.normalized;
-            controller.TargetLocation = transform.position + moveDir * 0.5f;
+                if (Vector2.Angle(transform.up, targetDir) < 5.0f)
+                {
+                    controller.Shoot();
+                }
+
+                var strafeRotation = Quaternion.AngleAxis(strafeAngle, Vector3.forward);
+                var moveDir = strafeRotation * targetDir.normalized;
+                controller.TargetLocation = transform.position + moveDir * 2.5f;
+            }
         }
         else
         {

@@ -9832,7 +9832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultOptions:
-    FlashColor: {r: 0.7735849, g: 0.59132373, b: 0.4269313, a: 0.3254902}
+    FlashColor: {r: 0.7735849, g: 0.59132373, b: 0.4269313, a: 0.12156863}
     FlashDuration: 0.1
     FlashBack: 1
     FlashDurationBack: 0.2

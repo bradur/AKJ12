@@ -31,13 +31,14 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen) {
+        if (PauseMenu.main.IsOpen || GameOverMenu.main.IsOpen)
+        {
             return;
         }
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) || Input.GetAxisRaw("Fire1") > 0.8f)
         {
             gun.Shoot();
             SoundManager.main.PlaySoundLoop(GameSoundType.GunShoot);
