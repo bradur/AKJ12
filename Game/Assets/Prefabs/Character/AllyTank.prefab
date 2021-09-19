@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: config
       value: 
       objectReference: {fileID: 11400000, guid: 2125ab420d2d1f64b9e5ca34d073b031, type: 2}
+    - target: {fileID: 2996875596588403892, guid: 6b600d49627e62547a96b7089a90c6c5, type: 3}
+      propertyPath: requiresJumpStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2996875596588403893, guid: 6b600d49627e62547a96b7089a90c6c5, type: 3}
       propertyPath: m_RootOrder
       value: 0

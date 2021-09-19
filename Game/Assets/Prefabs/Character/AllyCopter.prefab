@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: config
       value: 
       objectReference: {fileID: 11400000, guid: b5b303a587cd278489ddb1be7d594a0b, type: 2}
+    - target: {fileID: 948648687750427695, guid: 7d05074179d628a49a527a1fd3de72df, type: 3}
+      propertyPath: requiresJumpStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4637430470462157949, guid: 7d05074179d628a49a527a1fd3de72df, type: 3}
       propertyPath: m_Color.b
       value: 0.73299503
