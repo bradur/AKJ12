@@ -8,6 +8,10 @@ public class FactoryLight : MonoBehaviour
     private Sprite onSprite;
     [SerializeField]
     private Sprite offSprite;
+    [SerializeField]
+    private Material onMaterial;
+    [SerializeField]
+    private Material offMaterial;
     private bool lightOn = false;
     private SpriteRenderer spriteRenderer;
 
@@ -16,6 +20,7 @@ public class FactoryLight : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = offSprite;
+        spriteRenderer.material = offMaterial;
     }
 
     // Update is called once per frame
@@ -27,17 +32,20 @@ public class FactoryLight : MonoBehaviour
     {
         lightOn = !lightOn;
         spriteRenderer.sprite = lightOn ? onSprite : offSprite;
+        spriteRenderer.material = lightOn ? onMaterial : offMaterial;
     }
 
     public void SetOn()
     {
         lightOn = true;
         spriteRenderer.sprite = onSprite;
+        spriteRenderer.material = onMaterial;
     }
 
     public void SetOff()
     {
         lightOn = false;
         spriteRenderer.sprite = offSprite;
+        spriteRenderer.material = offMaterial;
     }
 }

@@ -25,14 +25,15 @@ public class PartPicker : MonoBehaviour
 
     public bool CollectPart(float value)
     {
-        ShowFactoryInfo();
         if (partsCollected >= maxParts)
         {
             return false;
         }
         else
         {
+            ShowFactoryInfo();
             partsCollected++;
+            UIRoboParts.main.SetValue(partsCollected, true);
             totalValue += value;
             return true;
         }
@@ -76,6 +77,7 @@ public class PartPicker : MonoBehaviour
         float value = totalValue;
         partsCollected = 0;
         totalValue = 0;
+        UIRoboParts.main.SetValue(partsCollected, true);
         HideFactoryInfo();
         return value;
     }
