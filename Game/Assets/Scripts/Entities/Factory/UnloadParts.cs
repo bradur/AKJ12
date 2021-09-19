@@ -5,12 +5,13 @@ using UnityEngine.Events;
 
 public class UnloadParts : MonoBehaviour
 {
-    private int partsNeeded;
     private UnityAction<float> addParts;
 
-    public void Initialize(UnityAction<float> addParts, int partsNeeded) {
+    private Factory factory;
+
+    public void Initialize(UnityAction<float> addParts, Factory factory) {
         this.addParts = addParts;
-        this.partsNeeded = partsNeeded;
+        this.factory = factory;
     }
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class UnloadParts : MonoBehaviour
         {
             PartPicker p = collider.GetComponent<PartPicker>();
             if (p != null) {
+                var partsNeeded = factory.partsNeededCount - (int)factory.partsValue;
                 float value = p.UnloadParts(partsNeeded);
                 addParts.Invoke(value);
             }

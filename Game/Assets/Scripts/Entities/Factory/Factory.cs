@@ -5,13 +5,13 @@ using UnityEngine;
 public class Factory : MonoBehaviour
 {
     [SerializeField]
-    private int partsNeededCount;
+    public int partsNeededCount;
     [SerializeField]
     private GameObject robotPrefab;
     [SerializeField]
     private Transform spawnPoint;
 
-    private float partsValue = 0;
+    public float partsValue = 0;
 
     private UnloadParts unloadTrigger;
     private FactoryLightArray lightArray;
@@ -37,7 +37,7 @@ public class Factory : MonoBehaviour
         unloadTrigger = GetComponentsInChildren<UnloadParts>()[0];
         if (unloadTrigger != null)
         {
-            unloadTrigger.Initialize(AddParts, partsNeededCount);
+            unloadTrigger.Initialize(AddParts, this);
         }
         else
         {
