@@ -18,7 +18,7 @@ public class Factory : MonoBehaviour
     private bool assemblyOngoing = false;
     private bool previousRobotInactive = false;
     private float assemblyStartedTime = 0;
-    private float assemblyDuration = 5f;
+    private float assemblyDuration = 3f;
 
     [SerializeField]
     private MinigameConfig minigameConfig;
