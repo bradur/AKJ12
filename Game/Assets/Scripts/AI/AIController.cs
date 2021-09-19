@@ -106,7 +106,6 @@ public class AIController : MonoBehaviour
         {
             factory.RobotActivated();
         }
-        Invoke("UpdatePathing", pathingInterval);
     }
 
     // Update is called once per frame
@@ -354,6 +353,10 @@ public class AIController : MonoBehaviour
 
     private bool HasPath()
     {
+        if (path == null)
+        {
+            UpdatePathing();
+        }
         return path.corners.Length > 0;
     }
 
