@@ -113,7 +113,6 @@ public class Factory : MonoBehaviour
                 textOptions.Color = Color.yellow;
                 text += "OK!";
             }
-            text += $"\n+{value} points";
             UIScore.main.AddValueAnimated(value);
             textOptions.Text = text;
             textOptions.Position = pos;

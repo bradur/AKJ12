@@ -82,17 +82,19 @@ public class Minigame : MonoBehaviour
             return false;
         }
 
+        Vector2 actualPosition = transform.position;
+
         if (area.Options.Result == SelectionResult.Positive)
         {
-            PositiveResult(area.Options.ResultValue, selectionPosition);
+            PositiveResult(area.Options.ResultValue, actualPosition);
         }
         else if (area.Options.Result == SelectionResult.Negative)
         {
-            NegativeResult(area.Options.ResultValue, selectionPosition);
+            NegativeResult(area.Options.ResultValue, actualPosition);
         }
         else if (area.Options.Result == SelectionResult.Restart)
         {
-            RestartResult(area.Options.ResultValue, selectionPosition);
+            RestartResult(area.Options.ResultValue, actualPosition);
             ResetInfo();
             return false;
         }
