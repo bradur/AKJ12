@@ -13,9 +13,12 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject EnemyPrefab;
 
+    private float started;
+
     // Start is called before the first frame update
     void Start()
     {
+        started = Time.time;
         Invoke("Spawn", InitialDelay);
         enemyParent = ContainerManager.main.GetRobotContainer().transform;
     }
@@ -27,11 +30,12 @@ public class EnemySpawner : MonoBehaviour
 
     void Spawn()
     {
+        var beenRunning = Time.time - started;
         var position = Random.insideUnitCircle.normalized * Radius;
         var enemy = Instantiate(EnemyPrefab, enemyParent);
         enemy.transform.position = position;
 
-        var timeUntilNext = 1 / (InitialEnemiesPerSecond + (Time.time - InitialDelay) * EnemiesPerSecondRampUp);
+        var timeUntilNext = 1 / (InitialEnemiesPerSecond + (beenRunning - InitialDelay) * EnemiesPerSecondRampUp);
         Invoke("Spawn", timeUntilNext);
     }
 }
