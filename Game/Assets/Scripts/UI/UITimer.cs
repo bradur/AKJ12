@@ -37,5 +37,13 @@ public class UITimer : MonoBehaviour
         if (timer != null) {
             txtTimer.text = timer.GetString();
         }
+        if (!Application.isFocused && timer.IsRunning) {
+            Debug.Log("Paused timer after unfocus.");
+            timer.Pause();
+        }
+        else if (Application.isFocused && !timer.IsRunning && !PauseMenu.main.IsOpen && !GameOverMenu.main.IsOpen) {
+            Debug.Log("Restarted timer after refocus.");
+            timer.Unpause();
+        }
     }
 }
